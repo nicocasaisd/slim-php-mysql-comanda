@@ -4,9 +4,9 @@ class Order
 {
     public $id;
     public $order_code;
-    public $order_status;
     public $order_list;
     public $order_price;
+    public $order_status;
 
 
     //GETTER
@@ -32,10 +32,11 @@ class Order
     public function createOrder()
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("INSERT INTO dishes (name, type, price) VALUES (:name, :type, :price)");
-        $consulta->bindValue(':name', $this->name, PDO::PARAM_STR);
-        $consulta->bindValue(':type', $this->type, PDO::PARAM_STR);
-        $consulta->bindValue(':price', $this->price);
+        $consulta = $dataAccessObject->prepareQuery("INSERT INTO orders (order_code, order_list, order_price, order_status) VALUES (:order_code, :order_list, :order_price, :order_status)");
+        $consulta->bindValue(':order_code', $this->order_code, PDO::PARAM_STR);
+        $consulta->bindValue(':order_list', $this->order_list, PDO::PARAM_STR);
+        $consulta->bindValue(':order_price', $this->order_price);
+        $consulta->bindValue(':order_status', $this->order_status);
         $consulta->execute();
 
         return $dataAccessObject->getLastId();
@@ -44,7 +45,7 @@ class Order
     public static function getAll()
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("SELECT id, name, type, price FROM dishes");
+        $consulta = $dataAccessObject->prepareQuery("SELECT id, order_code, order_list, order_price, order_status FROM orders");
         $consulta->execute();
 
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Order');
@@ -53,7 +54,7 @@ class Order
     public static function getOrder($id)
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("SELECT id, name, type, price FROM dishes WHERE id = :id");
+        $consulta = $dataAccessObject->prepareQuery("SELECT id, order_code, order_list, order_price, order_status FROM orders WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_STR);
         $consulta->execute();
 
@@ -63,18 +64,19 @@ class Order
     public static function modifyOrder($dish)
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("UPDATE dishes SET name = :name, price = :price, type = :type WHERE id = :id");
+        $consulta = $dataAccessObject->prepareQuery("UPDATE orders SET order_code = :order_code, order_price = :order_price, order_list = :order_list, order_status = :order_status WHERE id = :id");
         $consulta->bindValue(':id', $dish->id, PDO::PARAM_INT);
-        $consulta->bindValue(':name', $dish->name, PDO::PARAM_STR);
-        $consulta->bindValue(':type', $dish->type, PDO::PARAM_STR);
-        $consulta->bindValue(':price', $dish->price, PDO::PARAM_STR);
+        $consulta->bindValue(':order_code', $dish->order_code, PDO::PARAM_STR);
+        $consulta->bindValue(':order_list', $dish->order_list, PDO::PARAM_STR);
+        $consulta->bindValue(':order_price', $dish->order_price, PDO::PARAM_STR);
+        $consulta->bindValue(':order_status', $dish->order_status, PDO::PARAM_STR);
         $consulta->execute();
     }
 
     public static function deleteOrder($id)
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("DELETE dishes WHERE id = :id");
+        $consulta = $dataAccessObject->prepareQuery("DELETE orders WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->execute();
     }
