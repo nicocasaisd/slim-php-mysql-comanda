@@ -3,15 +3,17 @@
 class User
 {
     public $id;
-    public $user;
+    public $user_name;
     public $password;
+    public $user_type;
+    
 
     public function createUser()
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("INSERT INTO users (user, password) VALUES (:user, :password)");
+        $consulta = $dataAccessObject->prepareQuery("INSERT INTO users (user_name, password) VALUES (:user_name, :password)");
         $claveHash = password_hash($this->password, PASSWORD_DEFAULT);
-        $consulta->bindValue(':user', $this->user, PDO::PARAM_STR);
+        $consulta->bindValue(':user_name', $this->user_name, PDO::PARAM_STR);
         $consulta->bindValue(':password', $claveHash);
         $consulta->execute();
 
@@ -21,17 +23,17 @@ class User
     public static function getAll()
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("SELECT id, user, password FROM users");
+        $consulta = $dataAccessObject->prepareQuery("SELECT id, user_name, password FROM users");
         $consulta->execute();
 
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'User');
     }
 
-    public static function getUser($user)
+    public static function getUser($user_name)
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("SELECT id, user, password FROM users WHERE user = :user");
-        $consulta->bindValue(':user', $user, PDO::PARAM_STR);
+        $consulta = $dataAccessObject->prepareQuery("SELECT id, user_name, password FROM users WHERE user_name = :user_name");
+        $consulta->bindValue(':user_name', $user_name, PDO::PARAM_STR);
         $consulta->execute();
 
         return $consulta->fetchObject('User');
@@ -40,19 +42,19 @@ class User
     public static function modifyUser()
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("UPDATE users SET user = :user, password = :password WHERE id = :id");
-        $consulta->bindValue(':user', $this->user, PDO::PARAM_STR);
+        $consulta = $dataAccessObject->prepareQuery("UPDATE users SET user_name = :user_name, password = :password WHERE id = :id");
+        $consulta->bindValue(':user_name', $this->user_name, PDO::PARAM_STR);
         $consulta->bindValue(':password', $this->password, PDO::PARAM_STR);
         $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
         $consulta->execute();
     }
 
-    public static function deleteUser($user)
+    public static function deleteUser($user_name)
     {
         $dataAccessObject = DataAccess::getInstance();
         $consulta = $dataAccessObject->prepareQuery("UPDATE users SET fechaBaja = :fechaBaja WHERE id = :id");
         $fecha = new DateTime(date("d-m-Y"));
-        $consulta->bindValue(':id', $user, PDO::PARAM_INT);
+        $consulta->bindValue(':id', $user_name, PDO::PARAM_INT);
         $consulta->bindValue(':fechaBaja', date_format($fecha, 'Y-m-d H:i:s'));
         $consulta->execute();
     }

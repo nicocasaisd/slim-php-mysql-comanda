@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `user` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `user_name` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `date_end` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -39,7 +39,7 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `user`, `password`, `date_end`) VALUES
+INSERT INTO `users` (`id`, `user_name`, `password`, `date_end`) VALUES
 (1, 'franco', 'Hsu23sDsjseWs', NULL),
 (2, 'pedro', 'dasdqsdw2sd23', NULL),
 (3, 'jorge', 'sda2s2f332f2', NULL);

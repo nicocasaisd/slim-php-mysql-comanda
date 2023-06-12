@@ -2,19 +2,19 @@
 require_once './models/User.php';
 require_once './interfaces/IApiUsable.php';
 
-class UsuarioController extends User implements IApiUsable
+class UserController extends User implements IApiUsable
 {
     public function CargarUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
 
-        $user = $parametros['user'];
+        $user_name = $parametros['user_name'];
         $password = $parametros['password'];
         echo 'password: '.$password;
 
-        // Creamos el user
+        // Creamos el user_name
         $usr = new User();
-        $usr->user = $user;
+        $usr->user_name = $user_name;
         $usr->password = $password;
         $usr->createUser();
 
@@ -27,10 +27,10 @@ class UsuarioController extends User implements IApiUsable
 
     public function TraerUno($request, $response, $args)
     {
-        // Buscamos user por nombre
-        $usr = $args['user'];
-        $user = User::getUser($usr);
-        $payload = json_encode($user);
+        // Buscamos user_name por nombre
+        $usr = $args['user_name'];
+        $user_name = User::getUser($usr);
+        $payload = json_encode($user_name);
 
         $response->getBody()->write($payload);
         return $response

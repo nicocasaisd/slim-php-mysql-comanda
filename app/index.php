@@ -15,7 +15,7 @@ require __DIR__ . '/../vendor/autoload.php';
 require_once './db/DataAccess.php';
 // require_once './middlewares/Logger.php';
 
-require_once './controllers/UsuarioController.php';
+require_once './controllers/UserController.php';
 
 // Load ENV
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -31,10 +31,10 @@ $app->addErrorMiddleware(true, true, true);
 $app->addBodyParsingMiddleware();
 
 // Routes
-$app->group('/usuarios', function (RouteCollectorProxy $group) {
-    $group->get('[/]', \UsuarioController::class . ':TraerTodos');
-    $group->get('/{user}', \UsuarioController::class . ':TraerUno');
-    $group->post('[/]', \UsuarioController::class . ':CargarUno');
+$app->group('/users', function (RouteCollectorProxy $group) {
+    $group->get('[/]', \UserController::class . ':TraerTodos');
+    $group->get('/{user}', \UserController::class . ':TraerUno');
+    $group->post('[/]', \UserController::class . ':CargarUno');
   });
 
 $app->get('[/]', function (Request $request, Response $response) {    
