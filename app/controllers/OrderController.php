@@ -8,16 +8,18 @@ class OrderController extends Order implements IApiUsable
     {
         $parametros = $request->getParsedBody();
 
-        $name = $parametros['name'];
-        $type = $parametros['type'];
-        $price = $parametros['price'];
+        $order_code = $parametros['order_code'];
+        $order_list = $parametros['order_list'];
+        $order_price = $parametros['order_price'];
+        $order_status = $parametros['order_status'];
 
-        // Creamos el dish
-        $dish = new Order();
-        $dish->name = $name;
-        $dish->type = $type;
-        $dish->price = $price;
-        $dish->createOrder();
+        // Creamos el order
+        $order = new Order();
+        $order->order_code = $order_code;
+        $order->order_list = $order_list;
+        $order->order_price = $order_price;
+        $order->order_status = $order_status;
+        $order->createOrder();
 
         $payload = json_encode(array("mensaje" => "Order creado con exito"));
 
@@ -30,8 +32,8 @@ class OrderController extends Order implements IApiUsable
     {
         // Buscamos user_name por nombre
         $id = $args['dish_id'];
-        $dish = Order::getOrder($id);
-        $payload = json_encode($dish);
+        $order = Order::getOrder($id);
+        $payload = json_encode($order);
 
         $response->getBody()->write($payload);
         return $response
