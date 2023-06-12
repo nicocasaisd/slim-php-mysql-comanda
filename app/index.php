@@ -16,6 +16,7 @@ require_once './db/DataAccess.php';
 // require_once './middlewares/Logger.php';
 
 require_once './controllers/UserController.php';
+require_once './controllers/DishController.php';
 
 // Load ENV
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -35,6 +36,12 @@ $app->group('/users', function (RouteCollectorProxy $group) {
     $group->get('[/]', \UserController::class . ':TraerTodos');
     $group->get('/{user}', \UserController::class . ':TraerUno');
     $group->post('[/]', \UserController::class . ':CargarUno');
+  });
+
+  $app->group('/dishes', function (RouteCollectorProxy $group) {
+    $group->get('[/]', \DishController::class . ':TraerTodos');
+    $group->get('/{dish}', \DishController::class . ':TraerUno');
+    $group->post('[/]', \DishController::class . ':CargarUno');
   });
 
 $app->get('[/]', function (Request $request, Response $response) {    

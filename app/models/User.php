@@ -17,6 +17,7 @@ class User
         $claveHash = password_hash($this->password, PASSWORD_DEFAULT);
         $consulta->bindValue(':user_name', $this->user_name, PDO::PARAM_STR);
         $consulta->bindValue(':password', $claveHash);
+        $consulta->bindValue(':user_name', $this->user_name, PDO::PARAM_STR);
         $consulta->execute();
 
         return $dataAccessObject->getLastId();
