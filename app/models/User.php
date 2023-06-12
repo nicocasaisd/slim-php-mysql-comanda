@@ -13,11 +13,11 @@ class User
     public function createUser()
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("INSERT INTO users (user_name, password) VALUES (:user_name, :password)");
+        $consulta = $dataAccessObject->prepareQuery("INSERT INTO users (user_name, password, user_type) VALUES (:user_name, :password, :user_type)");
         $claveHash = password_hash($this->password, PASSWORD_DEFAULT);
         $consulta->bindValue(':user_name', $this->user_name, PDO::PARAM_STR);
         $consulta->bindValue(':password', $claveHash);
-        $consulta->bindValue(':user_name', $this->user_name, PDO::PARAM_STR);
+        $consulta->bindValue(':user_type', $this->user_type, PDO::PARAM_STR);
         $consulta->execute();
 
         return $dataAccessObject->getLastId();
@@ -26,7 +26,7 @@ class User
     public static function getAll()
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("SELECT id, user_name, password FROM users");
+        $consulta = $dataAccessObject->prepareQuery("SELECT id, user_name, password, user_type FROM users");
         $consulta->execute();
 
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'User');
