@@ -1,8 +1,8 @@
 <?php
-require_once './models/Dish.php';
+require_once './models/Order.php';
 require_once './interfaces/IApiUsable.php';
 
-class DishController extends Dish implements IApiUsable
+class OrderController extends Order implements IApiUsable
 {
     public function CargarUno($request, $response, $args)
     {
@@ -13,13 +13,13 @@ class DishController extends Dish implements IApiUsable
         $price = $parametros['price'];
 
         // Creamos el dish
-        $dish = new Dish();
+        $dish = new Order();
         $dish->name = $name;
         $dish->type = $type;
         $dish->price = $price;
-        $dish->createDish();
+        $dish->createOrder();
 
-        $payload = json_encode(array("mensaje" => "Dish creado con exito"));
+        $payload = json_encode(array("mensaje" => "Order creado con exito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -30,7 +30,7 @@ class DishController extends Dish implements IApiUsable
     {
         // Buscamos user_name por nombre
         $id = $args['dish_id'];
-        $dish = Dish::getDish($id);
+        $dish = Order::getOrder($id);
         $payload = json_encode($dish);
 
         $response->getBody()->write($payload);
@@ -40,8 +40,9 @@ class DishController extends Dish implements IApiUsable
 
     public function TraerTodos($request, $response, $args)
     {
-        $list = Dish::getAll();
-        $payload = json_encode(array('listOfDishes' => $list));
+        $list = Order::getAll();
+        // var_dump($list);
+        $payload = json_encode(array('listOfOrders' => $list));
 
         $response->getBody()->write($payload);
         return $response
@@ -53,9 +54,9 @@ class DishController extends Dish implements IApiUsable
         $parametros = $request->getParsedBody();
 
         $nombre = $parametros['nombre'];
-        Dish::modifyDish($nombre);
+        Order::modifyOrder($nombre);
 
-        $payload = json_encode(array("mensaje" => "Dish modificado con exito"));
+        $payload = json_encode(array("mensaje" => "Order modificado con exito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -67,9 +68,9 @@ class DishController extends Dish implements IApiUsable
         $parametros = $request->getParsedBody();
 
         $id = $parametros['id'];
-        Dish::deleteDish($id);
+        Order::deleteOrder($id);
 
-        $payload = json_encode(array("mensaje" => "Dish borrado con exito"));
+        $payload = json_encode(array("mensaje" => "Order borrado con exito"));
 
         $response->getBody()->write($payload);
         return $response
