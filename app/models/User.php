@@ -6,6 +6,8 @@ class User
     public $user_name;
     public $password;
     public $user_type;
+
+
     
 
     public function createUser()
@@ -49,12 +51,12 @@ class User
         $consulta->execute();
     }
 
-    public static function deleteUser($user_name)
+    public static function deleteUser($id)
     {
         $dataAccessObject = DataAccess::getInstance();
         $consulta = $dataAccessObject->prepareQuery("UPDATE users SET fechaBaja = :fechaBaja WHERE id = :id");
         $fecha = new DateTime(date("d-m-Y"));
-        $consulta->bindValue(':id', $user_name, PDO::PARAM_INT);
+        $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->bindValue(':fechaBaja', date_format($fecha, 'Y-m-d H:i:s'));
         $consulta->execute();
     }

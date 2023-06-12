@@ -1,24 +1,23 @@
 <?php
-require_once './models/User.php';
+require_once './models/Dish.php';
 require_once './interfaces/IApiUsable.php';
 
-class UserController extends User implements IApiUsable
+class DishController extends Dish implements IApiUsable
 {
     public function CargarUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
 
-        $user_name = $parametros['user_name'];
-        $password = $parametros['password'];
-        echo 'password: '.$password;
+        $name = $parametros['name'];
+        $price = $parametros['price'];
 
-        // Creamos el user_name
-        $usr = new User();
-        $usr->user_name = $user_name;
-        $usr->password = $password;
-        $usr->createUser();
+        // Creamos el dish
+        $dish = new Dish();
+        $dish->name = $name;
+        $dish->price = $price;
+        $dish->createDish();
 
-        $payload = json_encode(array("mensaje" => "User creado con exito"));
+        $payload = json_encode(array("mensaje" => "Dish creado con exito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -28,9 +27,9 @@ class UserController extends User implements IApiUsable
     public function TraerUno($request, $response, $args)
     {
         // Buscamos user_name por nombre
-        $usr = $args['user_name'];
-        $user_name = User::getUser($usr);
-        $payload = json_encode($user_name);
+        $dish = $args['name'];
+        $dish = Dish::getDish($dish);
+        $payload = json_encode($dish);
 
         $response->getBody()->write($payload);
         return $response
@@ -39,8 +38,8 @@ class UserController extends User implements IApiUsable
 
     public function TraerTodos($request, $response, $args)
     {
-        $lista = User::getAll();
-        $payload = json_encode(array("listaUsuario" => $lista));
+        $list = Dish::getAll();
+        $payload = json_encode(array("listOfDishes" => $list));
 
         $response->getBody()->write($payload);
         return $response
@@ -52,9 +51,9 @@ class UserController extends User implements IApiUsable
         $parametros = $request->getParsedBody();
 
         $nombre = $parametros['nombre'];
-        User::modifyUser($nombre);
+        Dish::modifyDish($nombre);
 
-        $payload = json_encode(array("mensaje" => "User modificado con exito"));
+        $payload = json_encode(array("mensaje" => "Dish modificado con exito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -66,9 +65,9 @@ class UserController extends User implements IApiUsable
         $parametros = $request->getParsedBody();
 
         $id = $parametros['id'];
-        User::deleteUser($id);
+        Dish::deleteDish($id);
 
-        $payload = json_encode(array("mensaje" => "User borrado con exito"));
+        $payload = json_encode(array("mensaje" => "Dish borrado con exito"));
 
         $response->getBody()->write($payload);
         return $response

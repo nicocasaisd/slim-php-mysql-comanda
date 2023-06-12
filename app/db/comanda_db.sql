@@ -24,10 +24,15 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+-- Creamos la base de datos
+-- 
+CREATE SCHEMA IF NOT EXISTS `comanda_db` ;
+
 --
 -- Estructura de tabla para la tabla `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `user_name` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
@@ -43,6 +48,26 @@ INSERT INTO `users` (`id`, `user_name`, `password`, `date_end`) VALUES
 (1, 'franco', 'Hsu23sDsjseWs', NULL),
 (2, 'pedro', 'dasdqsdw2sd23', NULL),
 (3, 'jorge', 'sda2s2f332f2', NULL);
+
+--
+-- Estructura de tabla para la tabla `dishes`
+--
+
+DROP TABLE IF EXISTS `dishes`;
+CREATE TABLE `dishes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `dishes`
+--
+
+INSERT INTO `dishes` (`name`, `price`) VALUES
+('Coca', 100),
+('Papas', 200);
 
 --
 -- Índices para tablas volcadas
