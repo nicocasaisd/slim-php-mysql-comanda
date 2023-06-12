@@ -40,7 +40,7 @@ $app->group('/users', function (RouteCollectorProxy $group) {
 
   $app->group('/dishes', function (RouteCollectorProxy $group) {
     $group->get('[/]', \DishController::class . ':TraerTodos');
-    $group->get('/{dish}', \DishController::class . ':TraerUno');
+    $group->get('/{dish_id}', \DishController::class . ':TraerUno');
     $group->post('[/]', \DishController::class . ':CargarUno');
   });
 

@@ -72,6 +72,7 @@ CREATE TABLE
   `dishes` (
     `id` int (11) NOT NULL AUTO_INCREMENT,
     `name` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+    `type` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
     `price` decimal(10, 2) DEFAULT NULL,
     PRIMARY KEY (`id`)
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci;
@@ -80,10 +81,10 @@ CREATE TABLE
 -- Volcado de datos para la tabla `dishes`
 --
 INSERT INTO
-  `dishes` (`name`, `price`)
+  `dishes` (`name`, `type`, `price`)
 VALUES
-  ('Coca', 100),
-  ('Papas', 200);
+  ('Coca', 'BEBIDA',100),
+  ('Papas', 'COMIDA', 200);
 
 --
 -- Índices para tablas volcadas
