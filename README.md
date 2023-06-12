@@ -73,13 +73,13 @@ Ejecuta los siguientes comandos SQL para crear una tabla de prueba con datos ini
 -- Estructura de tabla para la tabla `usuarios`
 CREATE TABLE `usuarios` (
 `id` int(11) NOT NULL,
-`usuario` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
-`clave` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+`user` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+`password` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
 `fechaBaja` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Volcado de datos para la tabla `usuarios`
-INSERT INTO `usuarios` (`id`, `usuario`, `clave`, `fechaBaja`) VALUES
+INSERT INTO `usuarios` (`id`, `user`, `password`, `fechaBaja`) VALUES
 (1, 'franco', 'Hsu23sDsjseWs', NULL),
 (2, 'pedro', 'dasdqsdw2sd23', NULL),
 (3, 'jorge', 'sda2s2f332f2', NULL);
