@@ -39,13 +39,13 @@ class User
         return $consulta->fetchObject('User');
     }
 
-    public static function modifyUser()
+    public static function modifyUser($user)
     {
         $dataAccessObject = DataAccess::getInstance();
         $consulta = $dataAccessObject->prepareQuery("UPDATE users SET user_name = :user_name, password = :password WHERE id = :id");
-        $consulta->bindValue(':user_name', $this->user_name, PDO::PARAM_STR);
-        $consulta->bindValue(':password', $this->password, PDO::PARAM_STR);
-        $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $consulta->bindValue(':user_name', $user->user_name, PDO::PARAM_STR);
+        $consulta->bindValue(':password', $user->password, PDO::PARAM_STR);
+        $consulta->bindValue(':id', $user->id, PDO::PARAM_INT);
         $consulta->execute();
     }
 
