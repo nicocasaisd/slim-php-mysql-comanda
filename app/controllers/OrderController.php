@@ -8,17 +8,17 @@ class OrderController extends Order implements IApiUsable
     {
         $parametros = $request->getParsedBody();
 
-        $order_code = $parametros['order_code'];
-        $order_list = $parametros['order_list'];
-        $order_price = $parametros['order_price'];
-        $order_status = $parametros['order_status'];
+        $id_product = $parametros['id_product'];
+        $quantity = $parametros['quantity'];
+        $id_bill = $parametros['id_bill'];
+        $id_waiter = $parametros['id_waiter'];
 
         // Creamos el order
         $order = new Order();
-        $order->order_code = $order_code;
-        $order->order_list = $order_list;
-        $order->order_price = $order_price;
-        $order->order_status = $order_status;
+        $order->id_product = $id_product;
+        $order->quantity = $quantity;
+        $order->id_bill = $id_bill;
+        $order->id_waiter = $id_waiter;
         $order->createOrder();
 
         $payload = json_encode(array("mensaje" => "Order creado con exito"));
@@ -31,7 +31,7 @@ class OrderController extends Order implements IApiUsable
     public function TraerUno($request, $response, $args)
     {
         // Buscamos user_name por nombre
-        $id = $args['dish_id'];
+        $id = $args['order_id'];
         $order = Order::getOrder($id);
         $payload = json_encode($order);
 

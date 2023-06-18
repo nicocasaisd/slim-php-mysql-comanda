@@ -63,7 +63,7 @@ $app->get('[/]', function (Request $request, Response $response) {
 $app->get('/tests', function (Request $request, Response $response){
   // String to time
   $phpdate = DateTimeController::MySQLToDateTime( '2023-06-18 11:11:11' );
-  $waitinTime = DateTimeController::getEstimatedDateTime(30);
+  $waitinTime = DateTimeController::getPreparationDateTime(30);
   // $remaininTime = DateTimeController::getRemainingMinutes('2023-06-18 16:20:11');
   $remaininTime = DateTimeController::getRemainingMinutes(DateTimeController::DateTimeToMySQL($waitinTime));
 

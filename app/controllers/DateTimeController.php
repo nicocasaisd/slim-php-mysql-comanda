@@ -14,7 +14,7 @@ class DateTimeController
         return $mySQlDate;
     }
 
-    public static function getEstimatedDateTime($mins)
+    public static function getPreparationDateTime($mins)
     {
         $now = new DateTime();
         $intervalo = DateInterval::createFromDateString($mins . ' minutes');

@@ -89,10 +89,15 @@ DROP TABLE IF EXISTS `orders`;
 CREATE TABLE
   `orders` (
     `id` int (11) NOT NULL AUTO_INCREMENT,
-    `order_code` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-    `order_list` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
-    `order_price` decimal(10, 2) DEFAULT NULL,
-    `order_status` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+    `dateTimeString` DATETIME NOT NULL,
+    `id_product` int(11) NOT NULL,
+    `quantity` int(3) NOT NULL,
+    `id_bill` int(11) NOT NULL,
+    `id_waiter` int(11) NOT NULL,
+    `id_cook` int(11) NOT NULL,
+    `status` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+    `preparationDateTimeString` DATETIME NOT NULL,
+    `subtotal` decimal(10, 2) DEFAULT NULL,
     PRIMARY KEY (`id`)
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci;
 
@@ -100,10 +105,10 @@ CREATE TABLE
 -- Volcado de datos para la tabla `orders`
 --
 INSERT INTO
-  `orders` (`order_code`, `order_list`, `order_price`, `order_status`)
+  `orders` (`dateTimeString`, `id_product`, `quantity`, `id_waiter`, `id_bill`, `id_cook`, `status`, `preparationDateTimeString`, `subtotal`)
 VALUES
-  ('ab100', "[{'coca':'2', 'bife':'1'}]", 300, 'EN PREPARACION'),
-   ('ab200', "[{'seven-up':'2', 'bife':'3'}]", 400, 'EN PREPARACION');
+  ('2023-06-18 11:11:11', '1','1','1','1','1','EN PREPARACION', '2023-06-18 11:11:11', 300),
+  ('2023-06-18 11:11:11', '1','1','1','1','1','EN PREPARACION', '2023-06-18 11:11:11', 300);
 
 --
 -- Índices para tablas volcadas
