@@ -15,10 +15,12 @@ class OrderController extends Order implements IApiUsable
 
         // Creamos el order
         $order = new Order();
+        $order->dateTimeString = DateTimeController::getNowAsMySQL();
         $order->id_product = $id_product;
         $order->quantity = $quantity;
         $order->id_bill = $id_bill;
         $order->id_waiter = $id_waiter;
+        $order->status = 'EN PREPARACION';
         $order->createOrder();
 
         $payload = json_encode(array("mensaje" => "Order creado con exito"));

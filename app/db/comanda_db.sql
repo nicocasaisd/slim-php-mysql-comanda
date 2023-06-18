@@ -94,9 +94,9 @@ CREATE TABLE
     `quantity` int(3) NOT NULL,
     `id_bill` int(11) NOT NULL,
     `id_waiter` int(11) NOT NULL,
-    `id_cook` int(11) NOT NULL,
+    `id_cook` int(11) DEFAULT NULL,
     `status` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
-    `preparationDateTimeString` DATETIME NOT NULL,
+    `preparationDateTimeString` DATETIME DEFAULT NULL,
     `subtotal` decimal(10, 2) DEFAULT NULL,
     PRIMARY KEY (`id`)
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci;

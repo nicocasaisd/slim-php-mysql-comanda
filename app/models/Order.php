@@ -59,6 +59,8 @@ class Order
         $consulta = $dataAccessObject->prepareQuery("SELECT * FROM orders");
         $consulta->execute();
 
+        // var_dump($consulta->fetchAll());
+
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Order');
     }
 
