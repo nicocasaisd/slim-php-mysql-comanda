@@ -63,13 +63,17 @@ $app->get('[/]', function (Request $request, Response $response) {
 $app->get('/tests', function (Request $request, Response $response){
   // String to time
   $phpdate = DateTimeController::MySQLToDateTime( '2023-06-18 11:11:11' );
+  $waitinTime = DateTimeController::getEstimatedDateTime(30);
+  // $remaininTime = DateTimeController::getRemainingMinutes('2023-06-18 16:20:11');
+  $remaininTime = DateTimeController::getRemainingMinutes(DateTimeController::DateTimeToMySQL($waitinTime));
 
 
   $array = array(
     // '1'=>$phpdate,
     // '2'=>DateTimeController::getNowAsMySQL(),
     // '3'=>DateTimeController::DateTimeToMySQL($phpdate),
-    '4'=>DateTimeController::getWaitingTime(30)
+    '4'=>$waitinTime,
+    '5'=>$remaininTime
     // '3'=>DateTimeController::DateTimeToMySQL("Hola")
   );
   $payload = json_encode($array);

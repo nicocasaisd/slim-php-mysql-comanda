@@ -14,12 +14,26 @@ class DateTimeController
         return $mySQlDate;
     }
 
-    public static function getWaitingTime($mins)
+    public static function getEstimatedDateTime($mins)
     {
         $now = new DateTime();
         $intervalo = DateInterval::createFromDateString($mins . ' minutes');
 
         return $now->add($intervalo);
+    }
+
+    public static function getRemainingMinutes($mySQLString)
+    {
+        $now = new DateTime();
+        $dateTime = self::MySQLToDateTime($mySQLString);
+        $interval = date_diff($now, $dateTime);
+        if($interval->d < 1 && !$interval->invert)
+        {
+            $mins = $interval->i;
+            $mins += $interval->h * 60;
+    
+            return $mins;
+        }
     }
 
     public static function MySQLToDateTime($mySQLString)
