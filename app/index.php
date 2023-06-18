@@ -18,6 +18,7 @@ require_once './db/DataAccess.php';
 require_once './controllers/UserController.php';
 require_once './controllers/ProductController.php';
 require_once './controllers/OrderController.php';
+require_once './controllers/DateTimeController.php';
 
 // Load ENV
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -56,6 +57,22 @@ $app->get('[/]', function (Request $request, Response $response) {
 
   $response->getBody()->write($payload);
   return $response->withHeader('Content-Type', 'application/json');
+});
+
+// Pruebas
+$app->get('/tests', function (Request $request, Response $response){
+  // String to time
+  $phpdate = strtotime( '2023-06-18 11:11:11' );
+
+
+  $array = array(
+    '1'=>$phpdate,
+    '2'=>DateTimeController::getNowAsMySQL()
+  );
+  $payload = json_encode($array);
+
+  $response->getBody()->write($payload);
+  return $response;
 });
 
 $app->run();
