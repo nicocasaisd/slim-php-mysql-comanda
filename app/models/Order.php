@@ -4,7 +4,7 @@ class Order
 {
     public $id;
     public $order_code;
-    public $order_list;
+    // public $order_list;
     public $order_price;
     public $order_status;
 
@@ -63,15 +63,15 @@ class Order
         return $consulta->fetchObject('Order');
     }
 
-    public static function modifyOrder($dish)
+    public static function modifyOrder($product)
     {
         $dataAccessObject = DataAccess::getInstance();
         $consulta = $dataAccessObject->prepareQuery("UPDATE orders SET order_code = :order_code, order_price = :order_price, order_list = :order_list, order_status = :order_status WHERE id = :id");
-        $consulta->bindValue(':id', $dish->id, PDO::PARAM_INT);
-        $consulta->bindValue(':order_code', $dish->order_code, PDO::PARAM_STR);
-        $consulta->bindValue(':order_list', $dish->order_list, PDO::PARAM_STR);
-        $consulta->bindValue(':order_price', $dish->order_price, PDO::PARAM_STR);
-        $consulta->bindValue(':order_status', $dish->order_status, PDO::PARAM_STR);
+        $consulta->bindValue(':id', $product->id, PDO::PARAM_INT);
+        $consulta->bindValue(':order_code', $product->order_code, PDO::PARAM_STR);
+        $consulta->bindValue(':order_list', $product->order_list, PDO::PARAM_STR);
+        $consulta->bindValue(':order_price', $product->order_price, PDO::PARAM_STR);
+        $consulta->bindValue(':order_status', $product->order_status, PDO::PARAM_STR);
         $consulta->execute();
     }
 

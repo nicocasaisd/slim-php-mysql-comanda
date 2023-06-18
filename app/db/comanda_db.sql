@@ -59,12 +59,12 @@ VALUES
   ('jorge', 'sda2s2f332f2', 'BARTENDER', NULL);
 
 --
--- Estructura de tabla para la tabla `dishes`
+-- Estructura de tabla para la tabla `products`
 --
-DROP TABLE IF EXISTS `dishes`;
+DROP TABLE IF EXISTS `products`;
 
 CREATE TABLE
-  `dishes` (
+  `products` (
     `id` int (11) NOT NULL AUTO_INCREMENT,
     `name` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
     `type` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
@@ -73,10 +73,10 @@ CREATE TABLE
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `dishes`
+-- Volcado de datos para la tabla `products`
 --
 INSERT INTO
-  `dishes` (`name`, `type`, `price`)
+  `products` (`name`, `type`, `price`)
 VALUES
   ('Coca', 'BEBIDA', 100),
   ('Papas', 'COMIDA', 200);

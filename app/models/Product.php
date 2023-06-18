@@ -1,6 +1,6 @@
 <?php
 
-class Dish
+class Product
 {
     public $id;
     public $name;
@@ -28,10 +28,10 @@ class Dish
         }
     }
 
-    public function createDish()
+    public function createProduct()
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("INSERT INTO dishes (name, type, price) VALUES (:name, :type, :price)");
+        $consulta = $dataAccessObject->prepareQuery("INSERT INTO products (name, type, price) VALUES (:name, :type, :price)");
         $consulta->bindValue(':name', $this->name, PDO::PARAM_STR);
         $consulta->bindValue(':type', $this->type, PDO::PARAM_STR);
         $consulta->bindValue(':price', $this->price);
@@ -43,37 +43,37 @@ class Dish
     public static function getAll()
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("SELECT id, name, type, price FROM dishes");
+        $consulta = $dataAccessObject->prepareQuery("SELECT id, name, type, price FROM products");
         $consulta->execute();
 
-        return $consulta->fetchAll(PDO::FETCH_CLASS, 'Dish');
+        return $consulta->fetchAll(PDO::FETCH_CLASS, 'Product');
     }
 
-    public static function getDish($id)
+    public static function getProduct($id)
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("SELECT id, name, type, price FROM dishes WHERE id = :id");
+        $consulta = $dataAccessObject->prepareQuery("SELECT id, name, type, price FROM products WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_STR);
         $consulta->execute();
 
-        return $consulta->fetchObject('Dish');
+        return $consulta->fetchObject('Product');
     }
 
-    public static function modifyDish($dish)
+    public static function modifyProduct($product)
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("UPDATE dishes SET name = :name, price = :price, type = :type WHERE id = :id");
-        $consulta->bindValue(':id', $dish->id, PDO::PARAM_INT);
-        $consulta->bindValue(':name', $dish->name, PDO::PARAM_STR);
-        $consulta->bindValue(':type', $dish->type, PDO::PARAM_STR);
-        $consulta->bindValue(':price', $dish->price, PDO::PARAM_STR);
+        $consulta = $dataAccessObject->prepareQuery("UPDATE products SET name = :name, price = :price, type = :type WHERE id = :id");
+        $consulta->bindValue(':id', $product->id, PDO::PARAM_INT);
+        $consulta->bindValue(':name', $product->name, PDO::PARAM_STR);
+        $consulta->bindValue(':type', $product->type, PDO::PARAM_STR);
+        $consulta->bindValue(':price', $product->price, PDO::PARAM_STR);
         $consulta->execute();
     }
 
-    public static function deleteDish($id)
+    public static function deleteProduct($id)
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("DELETE dishes WHERE id = :id");
+        $consulta = $dataAccessObject->prepareQuery("DELETE products WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->execute();
     }

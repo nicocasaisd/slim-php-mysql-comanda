@@ -16,7 +16,7 @@ require_once './db/DataAccess.php';
 // require_once './middlewares/Logger.php';
 
 require_once './controllers/UserController.php';
-require_once './controllers/DishController.php';
+require_once './controllers/ProductController.php';
 require_once './controllers/OrderController.php';
 
 // Load ENV
@@ -39,10 +39,10 @@ $app->group('/users', function (RouteCollectorProxy $group) {
   $group->post('[/]', \UserController::class . ':CargarUno');
 });
 
-$app->group('/dishes', function (RouteCollectorProxy $group) {
-  $group->get('[/]', \DishController::class . ':TraerTodos');
-  $group->get('/{dish_id}', \DishController::class . ':TraerUno');
-  $group->post('[/]', \DishController::class . ':CargarUno');
+$app->group('/products', function (RouteCollectorProxy $group) {
+  $group->get('[/]', \ProductController::class . ':TraerTodos');
+  $group->get('/{dish_id}', \ProductController::class . ':TraerUno');
+  $group->post('[/]', \ProductController::class . ':CargarUno');
 });
 
 $app->group('/orders', function (RouteCollectorProxy $group) {

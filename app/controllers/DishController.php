@@ -1,8 +1,8 @@
 <?php
-require_once './models/Dish.php';
+require_once './models/Product.php';
 require_once './interfaces/IApiUsable.php';
 
-class DishController extends Dish implements IApiUsable
+class ProductController extends Product implements IApiUsable
 {
     public function CargarUno($request, $response, $args)
     {
@@ -12,14 +12,14 @@ class DishController extends Dish implements IApiUsable
         $type = $parametros['type'];
         $price = $parametros['price'];
 
-        // Creamos el dish
-        $dish = new Dish();
-        $dish->name = $name;
-        $dish->type = $type;
-        $dish->price = $price;
-        $dish->createDish();
+        // Creamos el product
+        $product = new Product();
+        $product->name = $name;
+        $product->type = $type;
+        $product->price = $price;
+        $product->createProduct();
 
-        $payload = json_encode(array("mensaje" => "Dish creado con exito"));
+        $payload = json_encode(array("mensaje" => "Product creado con exito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -30,8 +30,8 @@ class DishController extends Dish implements IApiUsable
     {
         // Buscamos user_name por nombre
         $id = $args['dish_id'];
-        $dish = Dish::getDish($id);
-        $payload = json_encode($dish);
+        $product = Product::getProduct($id);
+        $payload = json_encode($product);
 
         $response->getBody()->write($payload);
         return $response
@@ -40,8 +40,8 @@ class DishController extends Dish implements IApiUsable
 
     public function TraerTodos($request, $response, $args)
     {
-        $list = Dish::getAll();
-        $payload = json_encode(array('listOfDishes' => $list));
+        $list = Product::getAll();
+        $payload = json_encode(array('listOfProductes' => $list));
 
         $response->getBody()->write($payload);
         return $response
@@ -53,9 +53,9 @@ class DishController extends Dish implements IApiUsable
         $parametros = $request->getParsedBody();
 
         $nombre = $parametros['nombre'];
-        Dish::modifyDish($nombre);
+        Product::modifyProduct($nombre);
 
-        $payload = json_encode(array("mensaje" => "Dish modificado con exito"));
+        $payload = json_encode(array("mensaje" => "Product modificado con exito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -67,9 +67,9 @@ class DishController extends Dish implements IApiUsable
         $parametros = $request->getParsedBody();
 
         $id = $parametros['id'];
-        Dish::deleteDish($id);
+        Product::deleteProduct($id);
 
-        $payload = json_encode(array("mensaje" => "Dish borrado con exito"));
+        $payload = json_encode(array("mensaje" => "Product borrado con exito"));
 
         $response->getBody()->write($payload);
         return $response
