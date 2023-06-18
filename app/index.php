@@ -66,9 +66,10 @@ $app->get('/tests', function (Request $request, Response $response){
 
 
   $array = array(
-    '1'=>$phpdate,
-    '2'=>DateTimeController::getNowAsMySQL(),
-    '3'=>DateTimeController::DateTimeToMySQL($phpdate)
+    // '1'=>$phpdate,
+    // '2'=>DateTimeController::getNowAsMySQL(),
+    // '3'=>DateTimeController::DateTimeToMySQL($phpdate),
+    '4'=>DateTimeController::getWaitingTime(30)
     // '3'=>DateTimeController::DateTimeToMySQL("Hola")
   );
   $payload = json_encode($array);
