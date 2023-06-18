@@ -62,12 +62,14 @@ $app->get('[/]', function (Request $request, Response $response) {
 // Pruebas
 $app->get('/tests', function (Request $request, Response $response){
   // String to time
-  $phpdate = strtotime( '2023-06-18 11:11:11' );
+  $phpdate = DateTimeController::MySQLToDateTime( '2023-06-18 11:11:11' );
 
 
   $array = array(
     '1'=>$phpdate,
-    '2'=>DateTimeController::getNowAsMySQL()
+    '2'=>DateTimeController::getNowAsMySQL(),
+    '3'=>DateTimeController::DateTimeToMySQL($phpdate)
+    // '3'=>DateTimeController::DateTimeToMySQL("Hola")
   );
   $payload = json_encode($array);
 
