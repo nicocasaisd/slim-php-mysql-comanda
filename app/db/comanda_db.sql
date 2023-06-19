@@ -136,6 +136,28 @@ VALUES
   ('2023-06-18 11:11:11', '1', 'Julieta Retori');
 
 --
+-- Estructura de tabla para la tabla `bills`
+--
+DROP TABLE IF EXISTS `tables`;
+
+CREATE TABLE
+  `tables` (
+    `id` int (11) NOT NULL AUTO_INCREMENT,
+    `status` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+    `sector` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+    PRIMARY KEY (`id`)
+  ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tables`
+--
+INSERT INTO
+  `tables` (`status`, `sector`)
+VALUES
+  ( 'LIBRE', 'COCINA'),
+  ( 'LIBRE', 'ENTRADA');
+
+--
 -- Índices para tablas volcadas
 --
 --

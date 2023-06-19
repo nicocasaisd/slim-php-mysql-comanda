@@ -40,6 +40,62 @@ class AuthorizationMW
             $response->getBody()->write("Acceso denegado. Debe ser SOCIO para ingresar.");
         }
 
+        return $response;
+    }
+
+    public function ValidateWaiter(Request $request, RequestHandler $handler): Response
+    {
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
+
+
+        $data = AuthJWT::ObtenerData($token);
+        $data = json_decode($data);
+        // var_dump($data);
+        if ($data->user_type == 'WAITER') {
+            $response = $handler->handle($request);
+        } else {
+            $response = new Response();
+            $response->getBody()->write("Acceso denegado. Debe ser WAITER para ingresar.");
+        }
+
+        return $response;
+    }
+
+    public function ValidateCook(Request $request, RequestHandler $handler): Response
+    {
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
+
+
+        $data = AuthJWT::ObtenerData($token);
+        $data = json_decode($data);
+        // var_dump($data);
+        if ($data->user_type == 'COOK') {
+            $response = $handler->handle($request);
+        } else {
+            $response = new Response();
+            $response->getBody()->write("Acceso denegado. Debe ser COOK para ingresar.");
+        }
+
+        return $response;
+    }
+
+    public function ValidateBrewer(Request $request, RequestHandler $handler): Response
+    {
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
+
+
+        $data = AuthJWT::ObtenerData($token);
+        $data = json_decode($data);
+        // var_dump($data);
+        if ($data->user_type == 'BREWER') {
+            $response = $handler->handle($request);
+        } else {
+            $response = new Response();
+            $response->getBody()->write("Acceso denegado. Debe ser BREWER para ingresar.");
+        }
 
         return $response;
     }

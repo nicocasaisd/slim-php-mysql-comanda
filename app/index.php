@@ -22,6 +22,7 @@ require_once './controllers/LoginController.php';
 require_once './controllers/ProductController.php';
 require_once './controllers/OrderController.php';
 require_once './controllers/BillController.php';
+require_once './controllers/TableController.php';
 require_once './controllers/DateTimeController.php';
 
 // Load ENV
@@ -69,6 +70,13 @@ $app->group('/bills', function (RouteCollectorProxy $group) {
   $group->get('[/]', \BillController::class . ':TraerTodos');
   $group->get('/{id_bill}', \BillController::class . ':TraerUno');
   $group->post('[/]', \BillController::class . ':CargarUno');
+})
+  ->add(\AuthorizationMW::class . ':ValidateToken');
+
+$app->group('/tables', function (RouteCollectorProxy $group) {
+  $group->get('[/]', \TableController::class . ':TraerTodos');
+  $group->get('/{id_table}', \TableController::class . ':TraerUno');
+  $group->post('[/]', \TableController::class . ':CargarUno');
 })
   ->add(\AuthorizationMW::class . ':ValidateToken');
 

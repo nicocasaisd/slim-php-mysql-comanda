@@ -8,14 +8,12 @@ class TableController extends Table implements IApiUsable
     {
         $parametros = $request->getParsedBody();
 
-        $id_table = $parametros['id_table'];
-        $customerName = $parametros['customerName'];
+        $sector = $parametros['sector'];
 
         // Creamos el table
         $table = new Table();
-        $table->dateTimeString = DateTimeController::getNowAsMySQL();
-        $table->id_table = $id_table;
-        $table->customerName = $customerName;
+        $table->status = 'LIBRE';
+        $table->sector = $sector;
         $table->createTable();
 
         $payload = json_encode(array("mensaje" => "Table creado con exito"));
