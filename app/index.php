@@ -38,31 +38,39 @@ $app->addErrorMiddleware(true, true, true);
 $app->addBodyParsingMiddleware();
 
 // Routes
+
+// Login
+$app->post('/login', \LoginController::class . ':ValidateLogin');
+
 $app->group('/users', function (RouteCollectorProxy $group) {
   $group->get('[/]', \UserController::class . ':TraerTodos');
   $group->get('/{user}', \UserController::class . ':TraerUno');
   $group->post('[/]', \UserController::class . ':CargarUno');
   $group->post('/login', \LoginController::class . ':ValidateLogin');
-});
+})
+  ->add(\AuthorizationMW::class . ':ValidateToken');
 
 $app->group('/products', function (RouteCollectorProxy $group) {
   $group->get('[/]', \ProductController::class . ':TraerTodos');
   $group->get('/{id_product}', \ProductController::class . ':TraerUno');
   $group->post('[/]', \ProductController::class . ':CargarUno');
-});
+})
+  ->add(\AuthorizationMW::class . ':ValidateToken');
 
 $app->group('/orders', function (RouteCollectorProxy $group) {
   $group->get('[/]', \OrderController::class . ':TraerTodos')
-    ->add(\AuthorizationMW::class. ':ValidateAdmin');
+    ->add(\AuthorizationMW::class . ':ValidateAdmin');
   $group->get('/{id_order}', \OrderController::class . ':TraerUno');
   $group->post('[/]', \OrderController::class . ':CargarUno');
-});
+})
+  ->add(\AuthorizationMW::class . ':ValidateToken');
 
 $app->group('/bills', function (RouteCollectorProxy $group) {
   $group->get('[/]', \BillController::class . ':TraerTodos');
   $group->get('/{id_bill}', \BillController::class . ':TraerUno');
   $group->post('[/]', \BillController::class . ':CargarUno');
-});
+})
+  ->add(\AuthorizationMW::class . ':ValidateToken');
 
 $app->get('[/]', function (Request $request, Response $response) {
   $payload = json_encode(array("mensaje" => "Slim Framework 4 PHP"));
@@ -72,9 +80,9 @@ $app->get('[/]', function (Request $request, Response $response) {
 });
 
 // Pruebas
-$app->get('/tests', function (Request $request, Response $response){
+$app->get('/tests', function (Request $request, Response $response) {
   // String to time
-  $phpdate = DateTimeController::MySQLToDateTime( '2023-06-18 11:11:11' );
+  $phpdate = DateTimeController::MySQLToDateTime('2023-06-18 11:11:11');
   $waitinTime = DateTimeController::getPreparationDateTime(30);
   // $remaininTime = DateTimeController::getRemainingMinutes('2023-06-18 16:20:11');
   $remaininTime = DateTimeController::getRemainingMinutes(DateTimeController::DateTimeToMySQL($waitinTime));
@@ -84,8 +92,8 @@ $app->get('/tests', function (Request $request, Response $response){
     // '1'=>$phpdate,
     // '2'=>DateTimeController::getNowAsMySQL(),
     // '3'=>DateTimeController::DateTimeToMySQL($phpdate),
-    '4'=>$waitinTime,
-    '5'=>$remaininTime
+    '4' => $waitinTime,
+    '5' => $remaininTime
     // '3'=>DateTimeController::DateTimeToMySQL("Hola")
   );
   $payload = json_encode($array);
