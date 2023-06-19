@@ -110,6 +110,31 @@ VALUES
   ('2023-06-18 11:11:11', '1','1','1','1','1','EN PREPARACION', '2023-06-18 11:11:11', 300),
   ('2023-06-18 11:11:11', '1','1','1','1','1','EN PREPARACION', '2023-06-18 11:11:11', 300);
 
+
+
+--
+-- Estructura de tabla para la tabla `bills`
+--
+DROP TABLE IF EXISTS `bills`;
+
+CREATE TABLE
+  `bills` (
+    `id` int (11) NOT NULL AUTO_INCREMENT,
+    `dateTimeString` DATETIME NOT NULL,
+    `id_table` int(11) NOT NULL,
+    `customerName` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+    PRIMARY KEY (`id`)
+  ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `bills`
+--
+INSERT INTO
+  `bills` (`dateTimeString`, `id_table`, `customerName`)
+VALUES
+  ('2023-06-18 11:11:11', '1', 'Nicolas Casais'),
+  ('2023-06-18 11:11:11', '1', 'Julieta Retori');
+
 --
 -- Índices para tablas volcadas
 --
