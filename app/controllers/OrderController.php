@@ -44,6 +44,11 @@ class OrderController extends Order implements IApiUsable
 
     public function TraerTodos($request, $response, $args)
     {
+        // var_dump($request);
+        // $header = $request->getHeaderLine('Authorization');
+        // $token = trim(explode("Bearer", $header)[1]);
+        // var_dump($header);
+        // var_dump($token);
         $list = Order::getAll();
         // var_dump($list);
         $payload = json_encode(array('listOfOrders' => $list));

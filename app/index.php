@@ -16,6 +16,7 @@ require_once './db/DataAccess.php';
 // require_once './middlewares/Logger.php';
 
 require_once './controllers/UserController.php';
+require_once './controllers/LoginController.php';
 require_once './controllers/ProductController.php';
 require_once './controllers/OrderController.php';
 require_once './controllers/BillController.php';
@@ -39,6 +40,7 @@ $app->group('/users', function (RouteCollectorProxy $group) {
   $group->get('[/]', \UserController::class . ':TraerTodos');
   $group->get('/{user}', \UserController::class . ':TraerUno');
   $group->post('[/]', \UserController::class . ':CargarUno');
+  $group->post('/login', \LoginController::class . ':ValidateLogin');
 });
 
 $app->group('/products', function (RouteCollectorProxy $group) {

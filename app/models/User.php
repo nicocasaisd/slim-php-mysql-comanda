@@ -35,7 +35,7 @@ class User
     public static function getUser($user_name)
     {
         $dataAccessObject = DataAccess::getInstance();
-        $consulta = $dataAccessObject->prepareQuery("SELECT id, user_name, password FROM users WHERE user_name = :user_name");
+        $consulta = $dataAccessObject->prepareQuery("SELECT id, user_name, password, user_type FROM users WHERE user_name = :user_name");
         $consulta->bindValue(':user_name', $user_name, PDO::PARAM_STR);
         $consulta->execute();
 
