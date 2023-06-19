@@ -18,6 +18,7 @@ require_once './db/DataAccess.php';
 require_once './controllers/UserController.php';
 require_once './controllers/ProductController.php';
 require_once './controllers/OrderController.php';
+require_once './controllers/BillController.php';
 require_once './controllers/DateTimeController.php';
 
 // Load ENV
@@ -42,14 +43,20 @@ $app->group('/users', function (RouteCollectorProxy $group) {
 
 $app->group('/products', function (RouteCollectorProxy $group) {
   $group->get('[/]', \ProductController::class . ':TraerTodos');
-  $group->get('/{dish_id}', \ProductController::class . ':TraerUno');
+  $group->get('/{id_product}', \ProductController::class . ':TraerUno');
   $group->post('[/]', \ProductController::class . ':CargarUno');
 });
 
 $app->group('/orders', function (RouteCollectorProxy $group) {
   $group->get('[/]', \OrderController::class . ':TraerTodos');
-  $group->get('/{order_id}', \OrderController::class . ':TraerUno');
+  $group->get('/{id_order}', \OrderController::class . ':TraerUno');
   $group->post('[/]', \OrderController::class . ':CargarUno');
+});
+
+$app->group('/bills', function (RouteCollectorProxy $group) {
+  $group->get('[/]', \BillController::class . ':TraerTodos');
+  $group->get('/{id_bill}', \BillController::class . ':TraerUno');
+  $group->post('[/]', \BillController::class . ':CargarUno');
 });
 
 $app->get('[/]', function (Request $request, Response $response) {
