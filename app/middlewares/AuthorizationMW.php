@@ -29,14 +29,17 @@ class AuthorizationMW
         $header = $request->getHeaderLine('Authorization');
         $token = trim(explode("Bearer", $header)[1]);
 
-        try {
-            $data = AuthJWT::ObtenerData($token);
-            if($data->'user_type')
+
+        $data = AuthJWT::ObtenerData($token);
+        $data = json_decode($data);
+        // var_dump($data);
+        if ($data->user_type == 'SOCIO') {
             $response = $handler->handle($request);
-        } catch (Exception $e) {
+        } else {
             $response = new Response();
-            $response->getBody()->write("Invalid Token.");
+            $response->getBody()->write("Acceso denegado. Debe ser SOCIO para ingresar.");
         }
+
 
         return $response;
     }

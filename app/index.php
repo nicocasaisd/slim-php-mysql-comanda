@@ -53,7 +53,7 @@ $app->group('/products', function (RouteCollectorProxy $group) {
 
 $app->group('/orders', function (RouteCollectorProxy $group) {
   $group->get('[/]', \OrderController::class . ':TraerTodos')
-    ->add(\AuthorizationMW::class. ':ValidateToken');
+    ->add(\AuthorizationMW::class. ':ValidateAdmin');
   $group->get('/{id_order}', \OrderController::class . ':TraerUno');
   $group->post('[/]', \OrderController::class . ':CargarUno');
 });
