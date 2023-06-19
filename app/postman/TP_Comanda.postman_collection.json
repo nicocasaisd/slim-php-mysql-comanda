@@ -25,8 +25,18 @@
 			"response": []
 		},
 		{
-			"name": "01_GetEnRoot",
+			"name": "01_GET_GetUsers",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -45,6 +55,16 @@
 		{
 			"name": "02_POST_AltaUsuario",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -57,7 +77,12 @@
 						},
 						{
 							"key": "password",
-							"value": "asd123",
+							"value": "asd1234",
+							"type": "default"
+						},
+						{
+							"key": "user_type",
+							"value": "SOCIO",
 							"type": "default"
 						}
 					]
@@ -71,6 +96,367 @@
 					"path": [
 						"users",
 						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02b_POST_LoginUsuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_name",
+							"value": "nico",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "asd1234",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/login",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "03_GET_GetProducts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:666/products/",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "04_POST_createProduct",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Seven-Up",
+							"type": "default"
+						},
+						{
+							"key": "type",
+							"value": "BEBIDA",
+							"type": "default"
+						},
+						{
+							"key": "price",
+							"value": "80",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/products",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "05_GET_GetOrders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:666/orders/",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"orders",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "06_POST_createOrder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_product",
+							"value": "6",
+							"type": "default"
+						},
+						{
+							"key": "quantity",
+							"value": "6",
+							"type": "default"
+						},
+						{
+							"key": "id_bill",
+							"value": "6",
+							"type": "default"
+						},
+						{
+							"key": "id_waiter",
+							"value": "6",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "07_GET_GetBills",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:666/bills/",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"bills",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "08_POST_createBill",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_table",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "customerName",
+							"value": "Julieta Ginocchio",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/bills",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"bills"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "07_GET_GetTables",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:666/tables/",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"tables",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "08_POST_createTable",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "sector",
+							"value": "PATIO",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/tables/",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"tables",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "00_Tests",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:666/tests",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"tests"
 					]
 				}
 			},
