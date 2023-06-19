@@ -13,7 +13,9 @@ use Slim\Routing\RouteContext;
 require __DIR__ . '/../vendor/autoload.php';
 
 require_once './db/DataAccess.php';
-// require_once './middlewares/Logger.php';
+
+// Middlewares
+require_once './middlewares/AuthorizationMW.php';
 
 require_once './controllers/UserController.php';
 require_once './controllers/LoginController.php';
@@ -50,7 +52,8 @@ $app->group('/products', function (RouteCollectorProxy $group) {
 });
 
 $app->group('/orders', function (RouteCollectorProxy $group) {
-  $group->get('[/]', \OrderController::class . ':TraerTodos');
+  $group->get('[/]', \OrderController::class . ':TraerTodos')
+    ->add(\AuthorizationMW::class. ':ValidateToken');
   $group->get('/{id_order}', \OrderController::class . ':TraerUno');
   $group->post('[/]', \OrderController::class . ':CargarUno');
 });
