@@ -108,6 +108,7 @@ $app->get('/tests', function (Request $request, Response $response) {
 
   $response->getBody()->write($payload);
   return $response;
-});
+})
+  ->add(\AuthorizationMW::class . ':ValidateToken');
 
 $app->run();

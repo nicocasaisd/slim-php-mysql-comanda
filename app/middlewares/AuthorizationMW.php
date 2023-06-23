@@ -13,6 +13,8 @@ class AuthorizationMW
         $header = $request->getHeaderLine('Authorization');
         $token = trim(explode("Bearer", $header)[1]);
 
+        // var_dump($token);
+        // var_dump(AuthJWT::ObtenerPayLoad($token));
         try {
             AuthJWT::VerificarToken($token);
             $response = $handler->handle($request);
@@ -33,11 +35,11 @@ class AuthorizationMW
         $data = AuthJWT::ObtenerData($token);
         $data = json_decode($data);
         // var_dump($data);
-        if ($data->user_type == 'SOCIO') {
+        if ($data->user_type == 'ADMIN') {
             $response = $handler->handle($request);
         } else {
             $response = new Response();
-            $response->getBody()->write("Acceso denegado. Debe ser SOCIO para ingresar.");
+            $response->getBody()->write("Acceso denegado. Debe ser ADMIN para ingresar.");
         }
 
         return $response;
@@ -52,7 +54,10 @@ class AuthorizationMW
         $data = AuthJWT::ObtenerData($token);
         $data = json_decode($data);
         // var_dump($data);
-        if ($data->user_type == 'WAITER') {
+        if (
+            $data->user_type == 'WAITER'
+            || $data->user_type == 'ADMIN'
+        ) {
             $response = $handler->handle($request);
         } else {
             $response = new Response();
@@ -71,7 +76,10 @@ class AuthorizationMW
         $data = AuthJWT::ObtenerData($token);
         $data = json_decode($data);
         // var_dump($data);
-        if ($data->user_type == 'COOK') {
+        if (
+            $data->user_type == 'COOK'
+            || $data->user_type == 'ADMIN'
+        ) {
             $response = $handler->handle($request);
         } else {
             $response = new Response();
@@ -90,7 +98,10 @@ class AuthorizationMW
         $data = AuthJWT::ObtenerData($token);
         $data = json_decode($data);
         // var_dump($data);
-        if ($data->user_type == 'BREWER') {
+        if (
+            $data->user_type == 'BREWER'
+            || $data->user_type == 'ADMIN'
+        ) {
             $response = $handler->handle($request);
         } else {
             $response = new Response();

@@ -54,8 +54,8 @@ CREATE TABLE
 INSERT INTO
   `users` (`user_name`, `password`, `user_type`, `date_end`)
 VALUES
-  ('franco', 'Hsu23sDsjseWs', 'SOCIO', NULL),
-  ('pedro', 'dasdqsdw2sd23', 'MOZO', NULL),
+  ('franco', 'Hsu23sDsjseWs', 'ADMIN', NULL),
+  ('pedro', 'dasdqsdw2sd23', 'WAITER', NULL),
   ('jorge', 'sda2s2f332f2', 'BARTENDER', NULL);
 
 --

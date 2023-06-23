@@ -82,7 +82,7 @@
 						},
 						{
 							"key": "user_type",
-							"value": "SOCIO",
+							"value": "ADMIN",
 							"type": "default"
 						}
 					]
