@@ -4,85 +4,106 @@ require_once './interfaces/IApiUsable.php';
 
 class OrderController extends Order implements IApiUsable
 {
-    public function CargarUno($request, $response, $args)
-    {
-        $parametros = $request->getParsedBody();
+  public function CargarUno($request, $response, $args)
+  {
+    $parametros = $request->getParsedBody();
 
-        $id_product = $parametros['id_product'];
-        $quantity = $parametros['quantity'];
-        $id_bill = $parametros['id_bill'];
-        $id_waiter = $parametros['id_waiter'];
+    $id_product = $parametros['id_product'];
+    $quantity = $parametros['quantity'];
+    $id_bill = $parametros['id_bill'];
+    $id_waiter = $parametros['id_waiter'];
 
-        // Creamos el order
-        $order = new Order();
-        $order->dateTimeString = DateTimeController::getNowAsMySQL();
-        $order->id_product = $id_product;
-        $order->quantity = $quantity;
-        $order->id_bill = $id_bill;
-        $order->id_waiter = $id_waiter;
-        $order->status = 'EN PREPARACION';
-        $order->createOrder();
+    // Creamos el order
+    $order = new Order();
+    $order->dateTimeString = DateTimeController::getNowAsMySQL();
+    $order->id_product = $id_product;
+    $order->quantity = $quantity;
+    $order->id_bill = $id_bill;
+    $order->id_waiter = $id_waiter;
+    $order->status = 'EN PREPARACION';
+    $order->createOrder();
 
-        $payload = json_encode(array("mensaje" => "Order creado con exito"));
+    $payload = json_encode(array("mensaje" => "Order creado con exito"));
 
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-    }
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
 
-    public function TraerUno($request, $response, $args)
-    {
-        // Buscamos user_name por nombre
-        $id = $args['order_id'];
-        $order = Order::getOrder($id);
-        $payload = json_encode($order);
+  public function TraerUno($request, $response, $args)
+  {
+    // Buscamos user_name por nombre
+    $id = $args['order_id'];
+    $order = Order::getOrder($id);
+    $payload = json_encode($order);
 
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-    }
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
 
-    public function TraerTodos($request, $response, $args)
-    {
-        $list = Order::getAll();
-        // var_dump($list);
-        $payload = json_encode(array('listOfOrders' => $list));
+  public function TraerTodos($request, $response, $args)
+  {
+    $list = Order::getAll();
+    // var_dump($list);
+    $payload = json_encode(array('listOfOrders' => $list));
 
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-    }
-    
-    public function ModificarUno($request, $response, $args)
-    {
-        $parametros = $request->getParsedBody();
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
 
-        $nombre = $parametros['nombre'];
-        Order::modifyOrder($nombre);
+  public function ModificarUno($request, $response, $args)
+  {
+    $parametros = $request->getParsedBody();
 
-        $payload = json_encode(array("mensaje" => "Order modificado con exito"));
+    $nombre = $parametros['nombre'];
+    Order::modifyOrder($nombre);
 
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-    }
+    $payload = json_encode(array("mensaje" => "Order modificado con exito"));
 
-    public function BorrarUno($request, $response, $args)
-    {
-        $parametros = $request->getParsedBody();
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
 
-        $id = $parametros['id'];
-        Order::deleteOrder($id);
+  public function BorrarUno($request, $response, $args)
+  {
+    $parametros = $request->getParsedBody();
 
-        $payload = json_encode(array("mensaje" => "Order borrado con exito"));
+    $id = $parametros['id'];
+    Order::deleteOrder($id);
 
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-    }
+    $payload = json_encode(array("mensaje" => "Order borrado con exito"));
 
-    public function RecibirOrden($request, $response, $args)
-    {
-      echo "En recibir orden";
-    }
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
+
+  public function RecibirOrden($request, $response, $args)
+  {
+    // Get params
+    $parametros = $request->getParsedBody();
+    var_dump($parametros);
+    $id_order = $parametros['id_order'];
+    $preparation_time = $parametros['preparation_time'];
+
+    // Obtengo id del jwt
+    $header = $request->getHeaderLine('Authorization');
+    $token = trim(explode("Bearer", $header)[1]);
+    $data = AuthJWT::ObtenerData($token);
+
+    // Modify Order
+    $order = Order::getOrder($id_order);
+    var_dump($order);
+    $order->status = "EN PREPARACION";
+    $order->id_cook = $data->
+
+
+      $payload = json_encode(array("mensaje" => "En Recibir"));
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
 }

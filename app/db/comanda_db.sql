@@ -107,8 +107,8 @@ CREATE TABLE
 INSERT INTO
   `orders` (`dateTimeString`, `id_product`, `quantity`, `id_waiter`, `id_bill`, `id_cook`, `status`, `preparationDateTimeString`, `subtotal`)
 VALUES
-  ('2023-06-18 11:11:11', '1','1','1','1','1','EN PREPARACION', '2023-06-18 11:11:11', 300),
-  ('2023-06-18 11:11:11', '1','1','1','1','1','EN PREPARACION', '2023-06-18 11:11:11', 300);
+  ('2023-06-18 11:11:11', '1','3','1','1',NULL,'PENDIENTE', '2023-06-18 11:11:11', 300),
+  ('2023-06-18 11:11:11', '1','2','1','1',NULL,'PENDIENTE', '2023-06-18 11:11:11', 300);
 
 
 

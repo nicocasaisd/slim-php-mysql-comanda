@@ -16,7 +16,7 @@ class LoginController
         
         if($user && password_verify($password, $user->password))
         {
-            $data = json_encode(array('user'=>$user_name, 'user_type'=>$user->user_type));
+            $data = json_encode(array('id'=>$user->id, 'user'=>$user_name, 'user_type'=>$user->user_type));
             $jwt = AuthJWT::CrearToken($data);
             $payload = json_encode(array('jwt' => $jwt));
         }
