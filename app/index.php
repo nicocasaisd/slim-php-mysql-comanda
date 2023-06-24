@@ -64,6 +64,7 @@ $app->group('/orders', function (RouteCollectorProxy $group) {
   $group->get('/{id_order}', \OrderController::class . ':TraerUno');
   $group->post('[/]', \OrderController::class . ':CargarUno');
   $group->put('/receive', \OrderController::class . ':RecibirOrden');
+  $group->put('/deliver', \OrderController::class . ':EntregarOrden');
 })
   ->add(\AuthorizationMW::class . ':ValidateToken');
 

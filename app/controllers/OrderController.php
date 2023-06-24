@@ -85,7 +85,6 @@ class OrderController extends Order implements IApiUsable
   {
     // Get params
     $parametros = $request->getParsedBody();
-    // var_dump($parametros);
     $id_order = $parametros['id_order'];
     $preparation_time = $parametros['preparation_time'];
 
@@ -94,15 +93,34 @@ class OrderController extends Order implements IApiUsable
 
     // Modify Order
     $order = Order::getOrder($id_order);
-    var_dump($order);
     $order->status = "EN PREPARACION";
     $order->id_cook = $data->id_user;
     $order->preparationDateTimeString = DateTimeController::getPreparationDateTime($preparation_time);
 
     Order::modifyOrder($order);
-    var_dump($order);
 
     $payload = json_encode(array("mensaje" => "Orden recibida con éxito"));
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
+
+  public function EntregarOrden($request, $response, $args)
+  {
+    // Get id
+    $id_order = $request->getParsedBody()['id_order'];
+
+    // Obtengo data del jwt
+    $data = UserController::GetDataFromJWT($request);
+
+    // Modify Order
+    $order = Order::getOrder($id_order);
+    $order->status = "LISTA PARA SERVIR";
+    $order->id_cook = $data->id_user;
+
+    Order::modifyOrder($order);
+
+    $payload = json_encode(array("mensaje" => "Orden entregada para servir con éxito"));
     $response->getBody()->write($payload);
     return $response
       ->withHeader('Content-Type', 'application/json');
