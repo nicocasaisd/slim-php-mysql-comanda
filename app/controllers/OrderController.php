@@ -117,6 +117,7 @@ class OrderController extends Order implements IApiUsable
     $order = Order::getOrder($id_order);
     $order->status = "LISTA PARA SERVIR";
     $order->id_cook = $data->id_user;
+    $order->preparationDateTimeString = 0;
 
     Order::modifyOrder($order);
 
@@ -130,20 +131,24 @@ class OrderController extends Order implements IApiUsable
   {
     // Get params
     $parametros = $request->getQueryParams();
-    // var_dump($parametros);
-    $id_table = $parametros['id_table'];
     $id_order = $parametros['id_order'];
 
     $order = Order::getOrder($id_order);
-    // var_dump($order);
-    try {
-      $remainingMinutes = DateTimeController::getRemainingMinutes($order->preparationDateTimeString);
-      $payload = json_encode(array("mensaje" => $remainingMinutes));
-    } catch (Exception $e) {
-      $payload = json_encode(array("error" => $e->getMessage()));
+    var_dump($order);
+    if ($order->status == "LISTA PARA SERVIR") {
+      $payload = json_encode(array("mensaje" => "Su orden ya está lista."));
+    } elseif ($order->status == "PENDIENTE") {
+      $payload = json_encode(array("mensaje" => "Su orden aún no ha sido recibida."));
+    } else {
+      try {
+        $remainingMinutes = DateTimeController::getRemainingMinutes($order->preparationDateTimeString);
+        $payload = json_encode(array("mensaje" => $remainingMinutes));
+      } catch (Exception $e) {
+        var_dump($e);
+        $payload = json_encode(array("error" => $e->getMessage()));
+      }
     }
 
-    // var_dump($remainingMinutes);
     $response->getBody()->write($payload);
     return $response
       ->withHeader('Content-Type', 'application/json');
