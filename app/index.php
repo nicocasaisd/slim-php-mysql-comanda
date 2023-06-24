@@ -89,6 +89,9 @@ $app->get('[/]', function (Request $request, Response $response) {
   return $response->withHeader('Content-Type', 'application/json');
 });
 
+// Remaining Time
+$app->get('/remaining_time', \OrderController::class . ':ObtenerTiempoRestante');
+
 // Pruebas
 $app->get('/tests', function (Request $request, Response $response) {
   // String to time

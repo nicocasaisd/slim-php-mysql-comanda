@@ -33,7 +33,7 @@ class OrderController extends Order implements IApiUsable
   public function TraerUno($request, $response, $args)
   {
     // Buscamos user_name por nombre
-    $id = $args['order_id'];
+    $id = $args['id_order'];
     $order = Order::getOrder($id);
     $payload = json_encode($order);
 
@@ -121,6 +121,29 @@ class OrderController extends Order implements IApiUsable
     Order::modifyOrder($order);
 
     $payload = json_encode(array("mensaje" => "Orden entregada para servir con éxito"));
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
+
+  public function ObtenerTiempoRestante($request, $response, $args)
+  {
+    // Get params
+    $parametros = $request->getQueryParams();
+    // var_dump($parametros);
+    $id_table = $parametros['id_table'];
+    $id_order = $parametros['id_order'];
+
+    $order = Order::getOrder($id_order);
+    // var_dump($order);
+    try {
+      $remainingMinutes = DateTimeController::getRemainingMinutes($order->preparationDateTimeString);
+      $payload = json_encode(array("mensaje" => $remainingMinutes));
+    } catch (Exception $e) {
+      $payload = json_encode(array("error" => $e->getMessage()));
+    }
+
+    // var_dump($remainingMinutes);
     $response->getBody()->write($payload);
     return $response
       ->withHeader('Content-Type', 'application/json');

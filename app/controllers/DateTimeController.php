@@ -23,17 +23,18 @@ class DateTimeController
         return $preparationDateTimeString;
     }
 
-    public static function getRemainingMinutes($mySQLString)
+    public static function getRemainingMinutes($preparationDateTimeString)
     {
         $now = new DateTime();
-        $dateTime = self::MySQLToDateTime($mySQLString);
+        $dateTime = self::MySQLToDateTime($preparationDateTimeString);
         $interval = date_diff($now, $dateTime);
-        if($interval->d < 1 && !$interval->invert)
-        {
+        if ($interval->d < 1 && !$interval->invert) {
             $mins = $interval->i;
             $mins += $interval->h * 60;
-    
+
             return $mins;
+        } else {
+            throw new UnexpectedValueException("Preparation DateTime must exist in future time.");
         }
     }
 
