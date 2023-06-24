@@ -19,7 +19,8 @@ class DateTimeController
         $now = new DateTime();
         $intervalo = DateInterval::createFromDateString($mins . ' minutes');
 
-        return $now->add($intervalo);
+        $preparationDateTimeString = self::DateTimeToMySQL($now->add($intervalo));
+        return $preparationDateTimeString;
     }
 
     public static function getRemainingMinutes($mySQLString)

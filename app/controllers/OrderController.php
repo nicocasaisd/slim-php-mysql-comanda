@@ -20,7 +20,7 @@ class OrderController extends Order implements IApiUsable
     $order->quantity = $quantity;
     $order->id_bill = $id_bill;
     $order->id_waiter = $id_waiter;
-    $order->status = 'EN PREPARACION';
+    $order->status = 'PENDIENTE';
     $order->createOrder();
 
     $payload = json_encode(array("mensaje" => "Order creado con exito"));
@@ -85,23 +85,24 @@ class OrderController extends Order implements IApiUsable
   {
     // Get params
     $parametros = $request->getParsedBody();
-    var_dump($parametros);
+    // var_dump($parametros);
     $id_order = $parametros['id_order'];
     $preparation_time = $parametros['preparation_time'];
 
-    // Obtengo id del jwt
-    $header = $request->getHeaderLine('Authorization');
-    $token = trim(explode("Bearer", $header)[1]);
-    $data = AuthJWT::ObtenerData($token);
+    // Obtengo data del jwt
+    $data = UserController::GetDataFromJWT($request);
 
     // Modify Order
     $order = Order::getOrder($id_order);
     var_dump($order);
     $order->status = "EN PREPARACION";
-    $order->id_cook = $data->
+    $order->id_cook = $data->id_user;
+    $order->preparationDateTimeString = DateTimeController::getPreparationDateTime($preparation_time);
 
+    Order::modifyOrder($order);
+    var_dump($order);
 
-      $payload = json_encode(array("mensaje" => "En Recibir"));
+    $payload = json_encode(array("mensaje" => "Orden recibida con éxito"));
     $response->getBody()->write($payload);
     return $response
       ->withHeader('Content-Type', 'application/json');
