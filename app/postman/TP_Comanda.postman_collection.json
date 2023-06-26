@@ -6,25 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "environment",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.environment.set(\"jwt\", pm.response.json().jwt);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": []
-			},
-			"response": []
-		},
-		{
 			"name": "01_GET_GetUsers",
 			"request": {
 				"auth": {
@@ -32,7 +13,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"value": "{{jwt-admin}}",
 							"type": "string"
 						}
 					]
@@ -53,14 +34,14 @@
 			"response": []
 		},
 		{
-			"name": "02_POST_AltaUsuario",
+			"name": "02_POST_AltaUsuario_ADMIN",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"value": "{{jwt-admin}}",
 							"type": "string"
 						}
 					]
@@ -83,6 +64,202 @@
 						{
 							"key": "user_type",
 							"value": "ADMIN",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/users/",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02_POST_AltaUsuario_WAITER",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_name",
+							"value": "yamil",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "asd1234",
+							"type": "default"
+						},
+						{
+							"key": "user_type",
+							"value": "WAITER",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/users/",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02_POST_AltaUsuario_BARTENDER",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_name",
+							"value": "ariel",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "asd1234",
+							"type": "default"
+						},
+						{
+							"key": "user_type",
+							"value": "BARTENDER",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/users/",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02_POST_AltaUsuario_COOK",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_name",
+							"value": "mauri",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "asd1234",
+							"type": "default"
+						},
+						{
+							"key": "user_type",
+							"value": "COOK",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/users/",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02_POST_AltaUsuario_BREWER",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_name",
+							"value": "lea",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "asd1234",
+							"type": "default"
+						},
+						{
+							"key": "user_type",
+							"value": "BREWER",
 							"type": "default"
 						}
 					]
@@ -153,7 +330,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"value": "{{jwt-waiter}}",
 							"type": "string"
 						}
 					]
@@ -182,7 +359,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"value": "{{jwt-waiter}}",
 							"type": "string"
 						}
 					]
@@ -230,7 +407,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"value": "{{jwt-admin}}",
 							"type": "string"
 						}
 					]
@@ -259,7 +436,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"value": "{{jwt-admin}}",
 							"type": "string"
 						}
 					]
@@ -271,22 +448,22 @@
 					"formdata": [
 						{
 							"key": "id_product",
-							"value": "6",
+							"value": "2",
 							"type": "default"
 						},
 						{
 							"key": "quantity",
-							"value": "6",
+							"value": "5",
 							"type": "default"
 						},
 						{
 							"key": "id_bill",
-							"value": "6",
+							"value": "2",
 							"type": "default"
 						},
 						{
 							"key": "id_waiter",
-							"value": "6",
+							"value": "4",
 							"type": "default"
 						}
 					]
@@ -312,7 +489,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"value": "{{jwt-admin}}",
 							"type": "string"
 						}
 					]
@@ -384,7 +561,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"value": "{{jwt-admin}}",
 							"type": "string"
 						}
 					]
@@ -413,7 +590,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODcxOTkyOTYsImV4cCI6MTY4NzI1OTI5NiwiYXVkIjoiNDA1ZTU3YTFhNTZkZDkwMGUyYjllNmQyNWUyY2Q1MjA1N2VkOWM2ZCIsImRhdGEiOiJ7XCJ1c2VyXCI6XCJuaWNvXCIsXCJ1c2VyX3R5cGVcIjpcIlNPQ0lPXCJ9IiwiYXBwIjoiVGVzdCBKV1QifQ.T2gMkC5l3sKrzCrK-kZQBMIv8fPLOiFGP-HqZfpq3N4",
+							"value": "{{jwt-admin}}",
 							"type": "string"
 						}
 					]
@@ -425,7 +602,7 @@
 					"formdata": [
 						{
 							"key": "sector",
-							"value": "PATIO",
+							"value": "COCINA",
 							"type": "default"
 						}
 					]
@@ -445,8 +622,619 @@
 			"response": []
 		},
 		{
-			"name": "00_Tests",
+			"name": "09_PUT_ReceiveOrder",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id_order",
+							"value": "3",
+							"type": "default"
+						},
+						{
+							"key": "preparation_time",
+							"value": "45",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/orders/receive",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"orders",
+						"receive"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "09_PUT_DeliverOrder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id_order",
+							"value": "5",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/orders/deliver",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"orders",
+						"deliver"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10_GET_GetRemainingTime",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_table",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "id_order",
+							"value": "1",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/remaining_time?id_order=3",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"remaining_time"
+					],
+					"query": [
+						{
+							"key": "id_table",
+							"value": "10",
+							"disabled": true
+						},
+						{
+							"key": "id_order",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10_POST_LoadFromCsv_User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "filename",
+							"value": "users.csv",
+							"type": "default"
+						},
+						{
+							"key": "controller",
+							"value": "UserController",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/csv/",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"csv",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10_POST_LoadFromCsv_Product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "filename",
+							"value": "products.csv",
+							"type": "default"
+						},
+						{
+							"key": "controller",
+							"value": "ProductController",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/csv/",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"csv",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10_POST_LoadFromCsv_Table",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "filename",
+							"value": "tables.csv",
+							"type": "default"
+						},
+						{
+							"key": "controller",
+							"value": "TableController",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/csv/",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"csv",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10_POST_LoadFromCsv_Bill",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "filename",
+							"value": "bills.csv",
+							"type": "default"
+						},
+						{
+							"key": "controller",
+							"value": "BillController",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/csv/",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"csv",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10_POST_LoadFromCsv_Order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "filename",
+							"value": "orders.csv",
+							"type": "default"
+						},
+						{
+							"key": "controller",
+							"value": "OrderController",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/csv/",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"csv",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10_GET_WriteToCsv_Order",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "localhost:666/csv/?filename=orders2.csv&model=Order",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"csv",
+						""
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "orders2.csv"
+						},
+						{
+							"key": "model",
+							"value": "Order"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10_GET_WriteToCsv_Product",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "localhost:666/csv/?filename=products2.csv&model=Product",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"csv",
+						""
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "products2.csv"
+						},
+						{
+							"key": "model",
+							"value": "Product"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10_GET_WriteToCsv_User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "localhost:666/csv/?filename=users2.csv&model=User",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"csv",
+						""
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "users2.csv"
+						},
+						{
+							"key": "model",
+							"value": "User"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10_GET_WriteToCsv_Table",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "localhost:666/csv/?filename=tables2.csv&model=Table",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"csv",
+						""
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "tables2.csv"
+						},
+						{
+							"key": "model",
+							"value": "Table"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10_GET_WriteToCsv_Bill",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "localhost:666/csv/?filename=bills2.csv&model=Bill",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"csv",
+						""
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "bills2.csv"
+						},
+						{
+							"key": "model",
+							"value": "Bill"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "00_Tests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.get(\"jwt-admin\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-admin}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {

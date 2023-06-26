@@ -104,35 +104,10 @@ $app->get('[/]', function (Request $request, Response $response) {
 // Remaining Time
 $app->get('/remaining_time', \OrderController::class . ':ObtenerTiempoRestante');
 
-// Load From Csv
+// Write & Load From Csv
 $app->group('/csv', function (RouteCollectorProxy $group) {
   $group->get('[/]', \FileController::class . ':WriteToCsv');
   $group->post('[/]', \FileController::class . ':LoadFromCsv');
 });
-
-// ************** Pruebas ****************
-$app->get('/tests', function (Request $request, Response $response) {
-  // String to time
-  $phpdate = DateTimeController::MySQLToDateTime('2023-06-18 11:11:11');
-  $waitinTime = DateTimeController::getPreparationDateTime(30);
-  // $remaininTime = DateTimeController::getRemainingMinutes('2023-06-18 16:20:11');
-  $remaininTime = DateTimeController::getRemainingMinutes(DateTimeController::DateTimeToMySQL($waitinTime));
-
-
-  $array = array(
-    // '1'=>$phpdate,
-    // '2'=>DateTimeController::getNowAsMySQL(),
-    // '3'=>DateTimeController::DateTimeToMySQL($phpdate),
-    // '4' => $waitinTime,
-    // '5' => $remaininTime
-    // '3'=>DateTimeController::DateTimeToMySQL("Hola")
-    FileController::ReadCsv('orders.csv')
-  );
-  $payload = json_encode($array);
-
-  $response->getBody()->write($payload);
-  return $response;
-})
-  ->add(\AuthorizationMW::class . ':ValidateToken');
 
 $app->run();
