@@ -30,6 +30,30 @@ class OrderController extends Order implements IApiUsable
       ->withHeader('Content-Type', 'application/json');
   }
 
+  public function CargarDesdeCSV($order)
+  {
+    $id_product = $order['id_product'];
+    $quantity = $order['quantity'];
+    $id_bill = $order['id_bill'];
+    $id_waiter = $order['id_waiter'];
+
+    // Creamos el order
+    $order = new Order();
+    $order->dateTimeString = DateTimeController::getNowAsMySQL();
+    $order->id_product = $id_product;
+    $order->quantity = $quantity;
+    $order->id_bill = $id_bill;
+    $order->id_waiter = $id_waiter;
+    $order->status = 'PENDIENTE';
+    $order->createOrder();
+
+    $payload = json_encode(array("mensaje" => "Order creado con exito"));
+
+    // $response->getBody()->write($payload);
+    // return $response
+    //   ->withHeader('Content-Type', 'application/json');
+  }
+
   public function TraerUno($request, $response, $args)
   {
     // Buscamos user_name por nombre
