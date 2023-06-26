@@ -24,6 +24,7 @@ require_once './controllers/OrderController.php';
 require_once './controllers/BillController.php';
 require_once './controllers/TableController.php';
 require_once './controllers/DateTimeController.php';
+require_once './controllers/FileController.php';
 
 // Load ENV
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -103,6 +104,12 @@ $app->get('[/]', function (Request $request, Response $response) {
 // Remaining Time
 $app->get('/remaining_time', \OrderController::class . ':ObtenerTiempoRestante');
 
+// Load From Csv
+$app->group('/csv', function (RouteCollectorProxy $group) {
+  $group->get('[/]', \FileController::class . ':WriteToCsv');
+  $group->post('[/]', \FileController::class . ':LoadFromCsv');
+});
+
 // ************** Pruebas ****************
 $app->get('/tests', function (Request $request, Response $response) {
   // String to time
@@ -116,9 +123,10 @@ $app->get('/tests', function (Request $request, Response $response) {
     // '1'=>$phpdate,
     // '2'=>DateTimeController::getNowAsMySQL(),
     // '3'=>DateTimeController::DateTimeToMySQL($phpdate),
-    '4' => $waitinTime,
-    '5' => $remaininTime
+    // '4' => $waitinTime,
+    // '5' => $remaininTime
     // '3'=>DateTimeController::DateTimeToMySQL("Hola")
+    FileController::ReadCsv('orders.csv')
   );
   $payload = json_encode($array);
 

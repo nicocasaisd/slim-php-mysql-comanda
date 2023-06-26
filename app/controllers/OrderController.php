@@ -30,28 +30,32 @@ class OrderController extends Order implements IApiUsable
       ->withHeader('Content-Type', 'application/json');
   }
 
-  public function CargarDesdeCSV($order)
+  public static function CargarDesdeCSV($order)
   {
-    $id_product = $order['id_product'];
-    $quantity = $order['quantity'];
-    $id_bill = $order['id_bill'];
-    $id_waiter = $order['id_waiter'];
-
     // Creamos el order
-    $order = new Order();
-    $order->dateTimeString = DateTimeController::getNowAsMySQL();
-    $order->id_product = $id_product;
-    $order->quantity = $quantity;
-    $order->id_bill = $id_bill;
-    $order->id_waiter = $id_waiter;
-    $order->status = 'PENDIENTE';
-    $order->createOrder();
+    $newOrder = new Order();
+    $newOrder->dateTimeString = $order['dateTimeString'];
+    $newOrder->id_product = $order['id_product'];
+    $newOrder->quantity = $order['quantity'];
+    $newOrder->id_bill = $order['id_bill'];
+    $newOrder->id_waiter = $order['id_waiter'];
+    $newOrder->id_cook = $order['id_cook'];
+    $newOrder->status = $order['status'];
+    $newOrder->preparationDateTimeString = $order['preparationDateTimeString'];
+    $newOrder->subtotal = $order['subtotal'];
+    var_dump($order);
 
-    $payload = json_encode(array("mensaje" => "Order creado con exito"));
+    $newOrder->createOrder();
 
-    // $response->getBody()->write($payload);
-    // return $response
-    //   ->withHeader('Content-Type', 'application/json');
+    return $newOrder;
+  }
+
+  public static function EscribirEnCSV()
+  {
+    $list = Order::getAll();
+    // var_dump($list);
+
+
   }
 
   public function TraerUno($request, $response, $args)

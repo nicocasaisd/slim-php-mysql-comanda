@@ -1,0 +1,4 @@
+id,dateTimeString,id_product,quantity,id_bill,id_waiter,id_cook,status,preparationDateTimeString,subtotal
+1,"2023-06-22 22:11:11",1,3,1,1,0,PENDIENTE,"0000-00-00 00:00:00",300.00
+2,"2023-06-23 23:11:11",1,3,1,1,0,PENDIENTE,"0000-00-00 00:00:00",300.00
+3,"2023-06-26 14:44:46",2,5,2,4,,PENDIENTE,,1000.00
