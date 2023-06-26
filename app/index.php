@@ -43,38 +43,49 @@ $app->addBodyParsingMiddleware();
 // Login
 $app->post('/login', \LoginController::class . ':ValidateLogin');
 
+// Users
 $app->group('/users', function (RouteCollectorProxy $group) {
   $group->get('[/]', \UserController::class . ':TraerTodos');
   $group->get('/{user}', \UserController::class . ':TraerUno');
   $group->post('[/]', \UserController::class . ':CargarUno');
   $group->post('/login', \LoginController::class . ':ValidateLogin');
 })
+  ->add(\AuthorizationMW::class . ':ValidateAdmin')
   ->add(\AuthorizationMW::class . ':ValidateToken');
 
+// Products
 $app->group('/products', function (RouteCollectorProxy $group) {
   $group->get('[/]', \ProductController::class . ':TraerTodos');
   $group->get('/{id_product}', \ProductController::class . ':TraerUno');
-  $group->post('[/]', \ProductController::class . ':CargarUno');
-})
-  ->add(\AuthorizationMW::class . ':ValidateToken');
-
-$app->group('/orders', function (RouteCollectorProxy $group) {
-  $group->get('[/]', \OrderController::class . ':TraerTodos')
+  $group->post('[/]', \ProductController::class . ':CargarUno')
     ->add(\AuthorizationMW::class . ':ValidateAdmin');
+})
+  ->add(\AuthorizationMW::class . ':ValidateWaiter')
+  ->add(\AuthorizationMW::class . ':ValidateToken');
+
+//Orders
+$app->group('/orders', function (RouteCollectorProxy $group) {
+  $group->get('[/]', \OrderController::class . ':TraerTodos');
   $group->get('/{id_order}', \OrderController::class . ':TraerUno');
-  $group->post('[/]', \OrderController::class . ':CargarUno');
-  $group->put('/receive', \OrderController::class . ':RecibirOrden');
-  $group->put('/deliver', \OrderController::class . ':EntregarOrden');
+  $group->post('[/]', \OrderController::class . ':CargarUno')
+    ->add(\AuthorizationMW::class . ':ValidateWaiter');
+  $group->put('/receive', \OrderController::class . ':RecibirOrden')
+    ->add(\AuthorizationMW::class . ':ValidateKitchen');
+  $group->put('/deliver', \OrderController::class . ':EntregarOrden')
+    ->add(\AuthorizationMW::class . ':ValidateKitchen');
 })
   ->add(\AuthorizationMW::class . ':ValidateToken');
 
+//Bills
 $app->group('/bills', function (RouteCollectorProxy $group) {
   $group->get('[/]', \BillController::class . ':TraerTodos');
   $group->get('/{id_bill}', \BillController::class . ':TraerUno');
   $group->post('[/]', \BillController::class . ':CargarUno');
 })
+->add(\AuthorizationMW::class . ':ValidateWaiter')
   ->add(\AuthorizationMW::class . ':ValidateToken');
 
+//Tables
 $app->group('/tables', function (RouteCollectorProxy $group) {
   $group->get('[/]', \TableController::class . ':TraerTodos');
   $group->get('/{id_table}', \TableController::class . ':TraerUno');
@@ -92,7 +103,7 @@ $app->get('[/]', function (Request $request, Response $response) {
 // Remaining Time
 $app->get('/remaining_time', \OrderController::class . ':ObtenerTiempoRestante');
 
-// Pruebas
+// ************** Pruebas ****************
 $app->get('/tests', function (Request $request, Response $response) {
   // String to time
   $phpdate = DateTimeController::MySQLToDateTime('2023-06-18 11:11:11');

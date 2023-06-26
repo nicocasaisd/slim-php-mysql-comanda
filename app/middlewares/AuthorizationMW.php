@@ -61,7 +61,7 @@ class AuthorizationMW
             $response = $handler->handle($request);
         } else {
             $response = new Response();
-            $response->getBody()->write("Acceso denegado. Debe ser WAITER para ingresar.");
+            $response->getBody()->write("Acceso denegado. Debe ser WAITER  o ADMIN para ingresar.");
         }
 
         return $response;
@@ -85,7 +85,7 @@ class AuthorizationMW
             $response = $handler->handle($request);
         } else {
             $response = new Response();
-            $response->getBody()->write("Acceso denegado. Debe ser COOK para ingresar.");
+            $response->getBody()->write("Acceso denegado. Debe ser empleado de cocina o ADMIN para ingresar.");
         }
 
         return $response;
