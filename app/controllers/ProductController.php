@@ -26,6 +26,20 @@ class ProductController extends Product implements IApiUsable
           ->withHeader('Content-Type', 'application/json');
     }
 
+    public static function CargarDesdeCSV($obj)
+    {
+      // Creamos el order
+      $newObject = new Product();
+      $newObject->name = $obj['name'];
+      $newObject->type = $obj['type'];
+      $newObject->price = $obj['price'];
+      var_dump($obj);
+  
+      $newObject->createProduct();
+  
+      return $newObject;
+    }
+
     public function TraerUno($request, $response, $args)
     {
         // Buscamos user_name por nombre

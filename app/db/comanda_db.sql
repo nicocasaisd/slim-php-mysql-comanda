@@ -51,12 +51,12 @@ CREATE TABLE
 --
 -- Volcado de datos para la tabla `users`
 --
-INSERT INTO
-  `users` (`user_name`, `password`, `user_type`, `date_end`)
-VALUES
-  ('franco', 'Hsu23sDsjseWs', 'ADMIN', NULL),
-  ('pedro', 'dasdqsdw2sd23', 'WAITER', NULL),
-  ('jorge', 'sda2s2f332f2', 'BARTENDER', NULL);
+-- INSERT INTO
+--   `users` (`user_name`, `password`, `user_type`, `date_end`)
+-- VALUES
+--   ('franco', 'Hsu23sDsjseWs', 'ADMIN', NULL),
+--   ('pedro', 'dasdqsdw2sd23', 'WAITER', NULL),
+--   ('jorge', 'sda2s2f332f2', 'BARTENDER', NULL);
 
 --
 -- Estructura de tabla para la tabla `products`
@@ -75,11 +75,11 @@ CREATE TABLE
 --
 -- Volcado de datos para la tabla `products`
 --
-INSERT INTO
-  `products` (`name`, `type`, `price`)
-VALUES
-  ('Coca', 'BEBIDA', 100),
-  ('Papas', 'COMIDA', 200);
+-- INSERT INTO
+--   `products` (`name`, `type`, `price`)
+-- VALUES
+--   ('Coca', 'BEBIDA', 100),
+--   ('Papas', 'COMIDA', 200);
 
 --
 -- Estructura de tabla para la tabla `orders`
@@ -129,11 +129,11 @@ CREATE TABLE
 --
 -- Volcado de datos para la tabla `bills`
 --
-INSERT INTO
-  `bills` (`dateTimeString`, `id_table`, `customerName`)
-VALUES
-  ('2023-06-18 11:11:11', '1', 'Nicolas Casais'),
-  ('2023-06-18 11:11:11', '1', 'Julieta Retori');
+-- INSERT INTO
+--   `bills` (`dateTimeString`, `id_table`, `customerName`)
+-- VALUES
+--   ('2023-06-18 11:11:11', '1', 'Nicolas Casais'),
+--   ('2023-06-18 11:11:11', '1', 'Julieta Retori');
 
 --
 -- Estructura de tabla para la tabla `bills`
@@ -151,11 +151,11 @@ CREATE TABLE
 --
 -- Volcado de datos para la tabla `tables`
 --
-INSERT INTO
-  `tables` (`status`, `sector`)
-VALUES
-  ( 'LIBRE', 'COCINA'),
-  ( 'LIBRE', 'ENTRADA');
+-- INSERT INTO
+--   `tables` (`status`, `sector`)
+-- VALUES
+--   ( 'LIBRE', 'COCINA'),
+--   ( 'LIBRE', 'ENTRADA');
 
 --
 -- Índices para tablas volcadas

@@ -43,19 +43,11 @@ class OrderController extends Order implements IApiUsable
     $newOrder->status = $order['status'];
     $newOrder->preparationDateTimeString = $order['preparationDateTimeString'];
     $newOrder->subtotal = $order['subtotal'];
-    var_dump($order);
+    // var_dump($order);
 
     $newOrder->createOrder();
 
     return $newOrder;
-  }
-
-  public static function EscribirEnCSV()
-  {
-    $list = Order::getAll();
-    // var_dump($list);
-
-
   }
 
   public function TraerUno($request, $response, $args)

@@ -25,6 +25,20 @@ class BillController extends Bill implements IApiUsable
           ->withHeader('Content-Type', 'application/json');
     }
 
+    public static function CargarDesdeCSV($obj)
+    {
+      // Creamos el order
+      $newObject = new Bill();
+      $newObject->dateTimeString = $obj['dateTimeString'];
+      $newObject->id_table = $obj['id_table'];
+      $newObject->customerName = $obj['customerName'];
+      var_dump($obj);
+  
+      $newObject->createBill();
+  
+      return $newObject;
+    }
+
     public function TraerUno($request, $response, $args)
     {
         // Buscamos user_name por nombre

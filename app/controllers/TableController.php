@@ -4,73 +4,87 @@ require_once './interfaces/IApiUsable.php';
 
 class TableController extends Table implements IApiUsable
 {
-    public function CargarUno($request, $response, $args)
-    {
-        $parametros = $request->getParsedBody();
+  public function CargarUno($request, $response, $args)
+  {
+    $parametros = $request->getParsedBody();
 
-        $sector = $parametros['sector'];
+    $sector = $parametros['sector'];
 
-        // Creamos el table
-        $table = new Table();
-        $table->status = 'LIBRE';
-        $table->sector = $sector;
-        $table->createTable();
+    // Creamos el table
+    $table = new Table();
+    $table->status = 'LIBRE';
+    $table->sector = $sector;
+    $table->createTable();
 
-        $payload = json_encode(array("mensaje" => "Table creado con exito"));
+    $payload = json_encode(array("mensaje" => "Table creado con exito"));
 
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-    }
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
 
-    public function TraerUno($request, $response, $args)
-    {
-        // Buscamos user_name por nombre
-        $id = $args['order_id'];
-        // $table = Table::getTable($id);
-        // $payload = json_encode($table);
 
-        // $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-    }
+  public static function CargarDesdeCSV($obj)
+  {
+    // Creamos el order
+    $newObject = new Table();
+    $newObject->status = $obj['status'];
+    $newObject->sector = $obj['sector'];
+    var_dump($obj);
 
-    public function TraerTodos($request, $response, $args)
-    {
-        $list = Table::getAll();
-        // var_dump($list);
-        $payload = json_encode(array('listOfTables' => $list));
+    $newObject->createTable();
 
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-    }
-    
-    public function ModificarUno($request, $response, $args)
-    {
-        $parametros = $request->getParsedBody();
+    return $newObject;
+  }
 
-        $nombre = $parametros['nombre'];
-        // Table::modifyTable($nombre);
+  public function TraerUno($request, $response, $args)
+  {
+    // Buscamos user_name por nombre
+    $id = $args['order_id'];
+    // $table = Table::getTable($id);
+    // $payload = json_encode($table);
 
-        $payload = json_encode(array("mensaje" => "Table modificado con exito"));
+    // $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
 
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-    }
+  public function TraerTodos($request, $response, $args)
+  {
+    $list = Table::getAll();
+    // var_dump($list);
+    $payload = json_encode(array('listOfTables' => $list));
 
-    public function BorrarUno($request, $response, $args)
-    {
-        $parametros = $request->getParsedBody();
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
 
-        $id = $parametros['id'];
-        // Table::deleteTable($id);
+  public function ModificarUno($request, $response, $args)
+  {
+    $parametros = $request->getParsedBody();
 
-        $payload = json_encode(array("mensaje" => "Table borrado con exito"));
+    $nombre = $parametros['nombre'];
+    // Table::modifyTable($nombre);
 
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-    }
+    $payload = json_encode(array("mensaje" => "Table modificado con exito"));
+
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
+
+  public function BorrarUno($request, $response, $args)
+  {
+    $parametros = $request->getParsedBody();
+
+    $id = $parametros['id'];
+    // Table::deleteTable($id);
+
+    $payload = json_encode(array("mensaje" => "Table borrado con exito"));
+
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
 }

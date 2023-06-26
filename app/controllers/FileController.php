@@ -22,12 +22,13 @@ class FileController
     {
         $parametros = $request->getParsedBody();
         $filename = $parametros['filename'];
+        $controller = $parametros['controller'];
         var_dump($filename);
 
         $csv = FileController::ReadCsv($filename);
 
         foreach ($csv as $obj) {
-            OrderController::CargarDesdeCSV($obj);
+            $controller::CargarDesdeCSV($obj);
         }
 
         $payload = json_encode(array("mensaje" => "Se cargaron valores desde Csv"));
@@ -56,9 +57,10 @@ class FileController
         // Get params
         $parametros = $request->getQueryParams();
         $filename = $parametros['filename'];
+        $model = $parametros['model'];
         // var_dump($filename);
 
-        $array = Order::getAll();
+        $array = $model::getAll();
         $headers = []; 
         foreach (get_object_vars($array[0]) as $key => $value) {
             array_push($headers, $key);

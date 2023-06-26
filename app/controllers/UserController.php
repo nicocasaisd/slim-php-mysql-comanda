@@ -27,6 +27,20 @@ class UserController extends User implements IApiUsable
       ->withHeader('Content-Type', 'application/json');
   }
 
+  public static function CargarDesdeCSV($obj)
+  {
+    // Creamos el order
+    $newObject = new User();
+    $newObject->user_name = $obj['user_name'];
+    $newObject->user_type = $obj['user_type'];
+    $newObject->password = $obj['password'];
+    var_dump($obj);
+
+    $newObject->createUser();
+
+    return $newObject;
+  }
+
   public function TraerUno($request, $response, $args)
   {
     // Buscamos user_name por nombre
