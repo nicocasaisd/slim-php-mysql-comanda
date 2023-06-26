@@ -46,8 +46,9 @@ class Order
         $consulta->bindValue(':id_cook', $this->id_cook, PDO::PARAM_INT);
         $consulta->bindValue(':status', $this->status, PDO::PARAM_STR);
         $consulta->bindValue(':preparationDateTimeString', $this->preparationDateTimeString, PDO::PARAM_STR);
-        $consulta->bindValue(':subtotal', $this->subtotal);
+        $consulta->bindValue(':subtotal', $this->getSubtotal());
         $consulta->execute();
+
 
         return $dataAccessObject->getLastId();
     }
@@ -97,6 +98,13 @@ class Order
         $consulta = $dataAccessObject->prepareQuery("DELETE orders WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->execute();
+    }
+
+    public function getSubtotal()
+    {
+        $price = Product::getProduct($this->id_product)->price;
+
+        return $price * $this->quantity;
     }
 
 }
