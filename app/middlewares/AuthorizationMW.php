@@ -67,7 +67,7 @@ class AuthorizationMW
         return $response;
     }
 
-    public function ValidateCook(Request $request, RequestHandler $handler): Response
+    public function ValidateKitchenEmployee(Request $request, RequestHandler $handler): Response
     {
         $header = $request->getHeaderLine('Authorization');
         $token = trim(explode("Bearer", $header)[1]);
@@ -78,6 +78,8 @@ class AuthorizationMW
         // var_dump($data);
         if (
             $data->user_type == 'COOK'
+            || $data->user_type == 'BARTENDER'
+            || $data->user_type == 'BREWER'
             || $data->user_type == 'ADMIN'
         ) {
             $response = $handler->handle($request);
@@ -89,25 +91,4 @@ class AuthorizationMW
         return $response;
     }
 
-    public function ValidateBrewer(Request $request, RequestHandler $handler): Response
-    {
-        $header = $request->getHeaderLine('Authorization');
-        $token = trim(explode("Bearer", $header)[1]);
-
-
-        $data = AuthJWT::ObtenerData($token);
-        $data = json_decode($data);
-        // var_dump($data);
-        if (
-            $data->user_type == 'BREWER'
-            || $data->user_type == 'ADMIN'
-        ) {
-            $response = $handler->handle($request);
-        } else {
-            $response = new Response();
-            $response->getBody()->write("Acceso denegado. Debe ser BREWER para ingresar.");
-        }
-
-        return $response;
-    }
 }
