@@ -1,0 +1,5 @@
+id,user_name,password,user_type
+1,franco,$2y$10$//u/3wOZFPq9pYrv05f8VueeEmP4Btz/O6g5TsEDRdSQcZfnseMYq,ADMIN
+2,pedro,$2y$10$9Rer9FtMUOqowT2sY3s2ju16mh29.al5KhSK3X/c9k3fUpkt2akD.,WAITER
+3,jorge,$2y$10$AsGYFnAkgSyJHfJuzYhdW.lwN6p0OW3.1rba.mOdP/IaP498/65Ru,BARTENDER
+4,nico,$2y$10$0SdoJhlHBof/qHPGUOXsvesuOmJskeQtezGV/P.oHYpgvANrJfuo.,ADMIN

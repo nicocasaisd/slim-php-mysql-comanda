@@ -154,7 +154,7 @@ class OrderController extends Order implements IApiUsable
     $id_order = $parametros['id_order'];
 
     $order = Order::getOrder($id_order);
-    var_dump($order);
+
     if ($order->status == "LISTA PARA SERVIR") {
       $payload = json_encode(array("mensaje" => "Su orden ya está lista."));
     } elseif ($order->status == "PENDIENTE") {
@@ -164,7 +164,7 @@ class OrderController extends Order implements IApiUsable
         $remainingMinutes = DateTimeController::getRemainingMinutes($order->preparationDateTimeString);
         $payload = json_encode(array("mensaje" => $remainingMinutes));
       } catch (Exception $e) {
-        var_dump($e);
+        // var_dump($e);
         $payload = json_encode(array("error" => $e->getMessage()));
       }
     }

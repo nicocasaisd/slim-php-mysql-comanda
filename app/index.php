@@ -70,10 +70,10 @@ $app->group('/orders', function (RouteCollectorProxy $group) {
   $group->get('/{id_order}', \OrderController::class . ':TraerUno');
   $group->post('[/]', \OrderController::class . ':CargarUno')
     ->add(\AuthorizationMW::class . ':ValidateWaiter');
-  $group->put('/receive', \OrderController::class . ':RecibirOrden')
-    ->add(\AuthorizationMW::class . ':ValidateKitchen');
-  $group->put('/deliver', \OrderController::class . ':EntregarOrden')
-    ->add(\AuthorizationMW::class . ':ValidateKitchen');
+  $group->put('/receive', \OrderController::class . ':RecibirOrden');
+    // ->add(\AuthorizationMW::class . ':ValidateKitchen');
+  $group->put('/deliver', \OrderController::class . ':EntregarOrden');
+    // ->add(\AuthorizationMW::class . ':ValidateKitchen');
 })
   ->add(\AuthorizationMW::class . ':ValidateToken');
 

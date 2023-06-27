@@ -1,4 +1,6 @@
 id,user_name,password,user_type
-1,franco,Hsu23sDsjseWs,ADMIN
-2,pedro,dasdqsdw2sd23,WAITER
-3,jorge,sda2s2f332f2,BARTENDER
+1,fernando,asd123,ADMIN
+2,yamil,asd123,WAITER
+3,mauri,asd123,COOK
+4,franco,asd123,BARMAN
+5,lea,asd123,BREWER
